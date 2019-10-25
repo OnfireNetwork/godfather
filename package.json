@@ -1,0 +1,14 @@
+{
+	"author": "JanHolger",
+	"version": "1.0",
+	"server_scripts": [
+		"json.lua",
+		"config.lua",
+		"spawn/server.lua",
+		"atm/server.lua"
+	],
+	"client_scripts": [
+		"atm/client.lua"
+	],
+	"files": []
+}
