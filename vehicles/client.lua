@@ -2,7 +2,7 @@ Dialog = Dialog or ImportPackage("dialogui")
 
 local vehicleMenu = Dialog.create("Vehicle Menu", nil, "{refuel}", "{lock}", "{engine}", "Park", "Unflip", "Cancel")
 local refuelMenu = Dialog.create("Vehicle Refuel Menu", nil, "Refuel", "Cancel")
-refuelMenu.addTextInput(refuelMenu, "Liter")
+Dialog.addTextInput(refuelMenu, "Liter")
 local refuelConfirmMenu = Dialog.create("Vehicle Refuel Confirmation", "This will cost you {price}$ \n Are you sure?", "Yes", "No")
 
 local lastVehicle = -1
