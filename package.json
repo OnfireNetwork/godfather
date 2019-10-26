@@ -7,13 +7,15 @@
 		"spawn/server.lua",
 		"atm/server.lua",
 		"admin/server.lua",
-		"vehicles/server.lua"
+		"vehicles/server.lua",
+		"seats/server.lua"
 	],
 	"client_scripts": [
 		"atm/client.lua",
 		"admin/client.lua",
 		"hud/client.lua",
-		"vehicles/client.lua"
+		"vehicles/client.lua",
+		"seats/client.lua"
 	],
 	"files": [
 		"hud/hud.html",
