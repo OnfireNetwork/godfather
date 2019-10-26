@@ -2,6 +2,21 @@ local function isAdmin(player)
     return true
 end
 
+local function calcPrice(liter)
+    return liter * 1.67
+end
+
+local fuelUsage = 30 / 3600
+
+CreateTimer(function()
+    local vehicles = GetAllVehicles()
+    for i=1, #vehicles do
+        if GetVehicleEngineState(vehicles[i]) then
+            SetVehiclePropertyValue(vehicles[i], "fuel", GetVehiclePropertyValue(vehicles[i], "fuel") - fuelUsage, true)
+        end
+    end
+end, 1000)
+
 AddRemoteEvent("VehicleMenuAction", function(player, action, vehicle)
     if action == "Lock" then
         local owner = GetVehiclePropertyValue(vehicle, "owner")
@@ -67,5 +82,13 @@ AddRemoteEvent("VehicleMenuAction", function(player, action, vehicle)
 		SetVehicleRotation(vehicle, 0.0, ry, 0.0)
         AddPlayerChat(player, "Vehicle has been unflipped!")
         return
+    end
+end)
+
+AddRemoteEvent("VehicleRefuel", function(player, vehicle, liter)
+    local oldFuel = GetVehiclePropertyValue(lastVehicle, "fuel")
+    if number <= 100 - oldFuel then
+        SetVehiclePropertyValue(vehicle, "fuel", oldFuel + liter, true)
+        AddPlayerChat(player, "Your vehicle got refueled!")
     end
 end)
