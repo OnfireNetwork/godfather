@@ -106,7 +106,7 @@ local weaponModels = {
 }
 
 local adminMenu = Dialog.create("Admin", nil, table.unpack(adminMenuOptions))
-local teleportMenu = Dialog.create("Teleport", nil, "To Place", "To Coords", "To Player", "Teleport Player", "Cancel")
+local teleportMenu = Dialog.create("Teleport", nil, "To Place", "To Coords", "To Player", "Teleport Player", "Teleport All", "Cancel")
 local teleportPlaceMenu = Dialog.create("Places", "Select a place to teleport to", table.unpack(teleportPlaceNames))
 local teleportCoordsMenu = Dialog.create("Coords", "Enter coords to teleport to", "Teleport", "Cancel")
 Dialog.addTextInput(teleportCoordsMenu, "X")
@@ -210,6 +210,9 @@ AddEvent("OnDialogSubmit", function(dialog, button, ...)
         if button == 4 then
             Dialog.setSelectOptions(teleportPlayerMenu, 1, table.unpack(makePlayerOptions()))
             Dialog.show(teleportPlayerMenu)
+        end
+        if button == 5 then
+            CallRemoteEvent("AdminTeleportAll")
         end
         return
     end

@@ -33,7 +33,22 @@ AddRemoteEvent("AdminTeleportPlayer", function(player, id, target)
     if GetPlayerDimension(id) ~= GetPlayerDimension(target) then
         SetPlayerDimension(id, GetPlayerDimension(target))
     end
-    SetPlayerLocation(id, x, y, z+100)
+    SetPlayerLocation(id, x, y, z+50)
+end)
+
+AddRemoteEvent("AdminTeleportAll", function(player)
+    if not isAdmin(player) then
+        return
+    end
+    local x, y, z = GetPlayerLocation(player)
+    for k,v in pairs(player_data) do
+        if k ~= player then
+            if GetPlayerDimension(player) ~= GetPlayerDimension(k) then
+                SetPlayerDimension(k, GetPlayerDimension(player))
+            end
+            SetPlayerLocation(k, x, y, z+50)
+        end
+    end
 end)
 
 AddRemoteEvent("AdminAddMoney", function(player, target, type, amount)
