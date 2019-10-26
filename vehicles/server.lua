@@ -42,16 +42,6 @@ AddRemoteEvent("VehicleMenuAction", function(player, action, vehicle)
         end
     end
     if action == "Engine" then
-        local owner = GetVehiclePropertyValue(vehicle, "owner")
-        if owner == -1 then
-            if not isAdmin(player) then
-                AddPlayerChat(player, "This vehicle doesn't belong to you!")
-                return
-            end
-        elseif owner ~= player then
-            AddPlayerChat(player, "This vehicle doesn't belong to you!")
-            return
-        end
         if GetVehicleEngineState(vehicle) then
             StopVehicleEngine(vehicle)
         else
@@ -92,5 +82,24 @@ AddRemoteEvent("VehicleRefuel", function(player, vehicle, liter)
         AddPlayerChat(player, "Your vehicle got refueled!")
     else
         AddPlayerChat("Your tank is too full! (server)")
+    end
+end)
+
+AddRemoteEvent("VehicleRadioStation", function(player, vehicle, station, volume)
+    AddPlayerChat(player, "VehicleRadioStation")
+    SetVehiclePropertyValue(vehicle, "radio_station", station, true)
+    SetVehiclePropertyValue(vehicle, "radio_volume", volume, true)
+    for i=0,GetVehicleNumberOfSeats(vehicle) do
+        local pass = GetVehiclePassenger(vehicle, i)
+        if pass ~= 0 then
+            Delay(500, function()
+                CallRemoteEvent(pass, "VehicleRadioUpdate")
+            end)
+        end
+    end
+    if station == 0 then
+        AddPlayerChat(player, "Radio turned off!")
+    else
+        AddPlayerChat(player, "Station changed!")
     end
 end)

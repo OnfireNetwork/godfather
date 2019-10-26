@@ -123,6 +123,7 @@ Dialog.addTextInput(moneyMenu, "Amount")
 local vehicleMenu = Dialog.create("Spawn Vehicle", nil, "Spawn", "Cancel")
 Dialog.addSelect(vehicleMenu, "Model", table.unpack(vehicleModels))
 Dialog.addTextInput(vehicleMenu, "License Plate")
+Dialog.addCheckbox(vehicleMenu, "Radio")
 Dialog.addCheckbox(vehicleMenu, "Nitro")
 local weaponMenu = Dialog.create("Give Weapon", nil, "Give", "Cancel")
 Dialog.addSelect(weaponMenu, "Player")
@@ -262,7 +263,7 @@ AddEvent("OnDialogSubmit", function(dialog, button, ...)
     if dialog == vehicleMenu then
         local args = {...}
         if button == 1 then
-            CallRemoteEvent("AdminSpawnVehicle", parseOptionId(args[1]), args[2], args[3] == 1)
+            CallRemoteEvent("AdminSpawnVehicle", parseOptionId(args[1]), args[2], args[3] == 1, args[4] == 1)
         end
         return
     end

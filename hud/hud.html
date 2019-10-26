@@ -7,7 +7,7 @@
                 src: url(Staatliches-Regular.ttf) format("truetype");
             }
             #cash-display {
-                font-family: 'Staatliches', cursive;
+                font-family: 'Staatliches', sans-serif;
                 color: darkgreen;
                 font-size: 40px;
                 position: absolute;
@@ -19,19 +19,58 @@
                  -1px  1px 1px black,
                  -1px -1px 1px black;
             }
+            .vehicle-data-box {
+                position: absolute;
+                bottom: 0px;
+                left: 44vw;
+                width: 12vw;
+            }
+            .vehicle-data-indicator {
+                font-family: 'Staatliches', sans-serif;
+                display: inline-block;
+                background-color: #2c3e50;
+                color: white;
+                width: 3.5vw;
+                margin-right: 0.5vw;
+                margin-left: 0.5vw;
+                opacity: 0.80;
+                padding: 10px;
+                text-align: center;
+                border: 2px solid #3498db;
+                border-bottom: 0px solid black;
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+            }
         </style>
     </head>
     <body>
         <div id="cash-display">
             0 $
         </div>
+        <div class="vehicle-data-box">
+            <div class="vehicle-data-indicator" id="vehicle-speed" style="display: none;">0<br>KM/H</div>
+            <div class="vehicle-data-indicator" id="vehicle-fuel" style="display: none;">0<br>Liter</div>
+        </div>
         <script>
             let elements = {
-                cash: document.getElementById("cash-display")
+                cash: document.getElementById("cash-display"),
+                speed: document.getElementById("vehicle-speed"),
+                fuel: document.getElementById("vehicle-fuel")
             };
             function SetCash(cash){
 
                 elements.cash.innerText = cash + " $"
+            }
+            function SetVehicleData(speed, fuel){
+                if(speed == -1000){
+                    elements.speed.style.display = "none";
+                    elements.fuel.style.display = "none";
+                }else{
+                    elements.speed.style.display = "inline-block";
+                    elements.fuel.style.display = "inline-block";
+                    elements.speed.innerHTML = speed.toFixed(0)+"<br>KM/H";
+                    elements.fuel.innerHTML = fuel.toFixed(0)+"<br>Liter";
+                }
             }
         </script>
     </body>

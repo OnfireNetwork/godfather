@@ -105,7 +105,7 @@ AddRemoteEvent("AdminGiveWeapon", function(player, target, weapon, slot, ammo, e
     AddPlayerChat(player, "Weapon set successfully!")
 end)
 
-AddRemoteEvent("AdminSpawnVehicle", function(player, model, plate, nitro)
+AddRemoteEvent("AdminSpawnVehicle", function(player, model, plate, radio, nitro)
     if not isAdmin(player) then
         return
     end
@@ -115,5 +115,8 @@ AddRemoteEvent("AdminSpawnVehicle", function(player, model, plate, nitro)
     SetVehiclePropertyValue(vehicle, "owner", -1, true)
     SetVehiclePropertyValue(vehicle, "locked", false, true)
     SetVehiclePropertyValue(vehicle, "fuel", 100, true)
+    SetVehiclePropertyValue(vehicle, "radio", radio, true)
+    SetVehiclePropertyValue(vehicle, "radio_station", 0, true)
+    SetVehiclePropertyValue(vehicle, "radio_volume", 0, true)
     SetPlayerInVehicle(player, vehicle)
 end)
