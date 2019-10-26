@@ -1,6 +1,6 @@
 Dialog = Dialog or ImportPackage("dialogui")
 
-local vehicleMenu = Dialog.create("Vehicle Menu", nil, "{lock}", "Park", "Unflip", "Cancel")
+local vehicleMenu = Dialog.create("Vehicle Menu", nil, "{lock}", "{engine}", "Park", "Unflip", "Cancel")
 local lastVehicle = -1
 
 local function OpenMenu(vehicle)
@@ -9,6 +9,11 @@ local function OpenMenu(vehicle)
         Dialog.setVariable(vehicleMenu, "lock", "Unlock")
     else
         Dialog.setVariable(vehicleMenu, "lock", "Lock")
+    end
+    if GetVehicleEngineState(vehicle) then
+        Dialog.setVariable(vehicleMenu, "engine", "Turn engine off")
+    else
+        Dialog.setVariable(vehicleMenu, "engine", "Turn engine on")
     end
     Dialog.show(vehicleMenu)
 end
@@ -46,10 +51,14 @@ AddEvent("OnDialogSubmit", function(dialog, button)
             return
         end
         if button == 2 then
-            CallRemoteEvent("VehicleMenuAction", "Park", lastVehicle)
+            CallRemoteEvent("VehicleMenuAction", "Engine", lastVehicle)
             return
         end
         if button == 3 then
+            CallRemoteEvent("VehicleMenuAction", "Park", lastVehicle)
+            return
+        end
+        if button == 4 then
             CallRemoteEvent("VehicleMenuAction", "Unflip", lastVehicle)
             return
         end

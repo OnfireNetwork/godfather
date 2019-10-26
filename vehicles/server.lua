@@ -26,6 +26,24 @@ AddRemoteEvent("VehicleMenuAction", function(player, action, vehicle)
             AddPlayerChat(player, "The vehicle has been unlocked!")
         end
     end
+    if action == "Engine" then
+        local owner = GetVehiclePropertyValue(vehicle, "owner")
+        if owner == -1 then
+            if not isAdmin(player) then
+                AddPlayerChat(player, "This vehicle doesn't belong to you!")
+                return
+            end
+        elseif owner ~= player then
+            AddPlayerChat(player, "This vehicle doesn't belong to you!")
+            return
+        end
+        if GetVehicleEngineState(vehicle) then
+            StopVehicleEngine(vehicle)
+        else
+            StartVehicleEngine(vehicle)
+        end
+        return
+    end
     if action == "Park" then
         local owner = GetVehiclePropertyValue(vehicle, "owner")
         if owner < 1 then
