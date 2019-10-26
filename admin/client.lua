@@ -3,12 +3,14 @@ Dialog = Dialog or ImportPackage("dialogui")
 local adminMenuOptions = {
     "Teleport",
     "Give Money",
+    "Spawn Vehicle",
     "Cancel"
 }
 if CopyToClipboard ~= nil then
     adminMenuOptions = {
         "Teleport",
         "Give Money",
+        "Spawn Vehicle",
         "Copy Position",
         "Cancel"
     }
@@ -52,6 +54,32 @@ for i=1,#teleportPlaces do
 end
 table.insert(teleportPlaceNames, "Cancel")
 
+local vehicleModels = {
+    "Sedan (1)",
+    "Sedan Onecolor (19)",
+    "Taxi (2)",
+    "Police (3)",
+    "Rolls Royce (4)",
+    "Saloon (5)",
+    "Nascar (6)",
+    "Pickup (7)",
+    "Coupè (11)",
+    "Rally (12)",
+    "Ambulance (8)",
+    "Truck (17)",
+    "Truck Camo (18)",
+    "Garbage Truck (9)",
+    "Transporter (22)",
+    "Transporter Camo (23)",
+    "HUMVEE (21)",
+    "Heavy (13)",
+    "Heavy Camo (14)",
+    "Heavy Rescue (15)",
+    "Heavy Military (16)",
+    "Helicopter (10)",
+    "Helicopter Onecolor (20)"
+}
+
 local adminMenu = Dialog.create("Admin", nil, table.unpack(adminMenuOptions))
 local teleportMenu = Dialog.create("Teleport", nil, "To Place", "To Coords", "To Player", "Teleport Player", "Cancel")
 local teleportPlaceMenu = Dialog.create("Places", "Select a place to teleport to", table.unpack(teleportPlaceNames))
@@ -67,6 +95,9 @@ local moneyMenu = Dialog.create("Give Money", nil, "Give", "Cancel")
 Dialog.addSelect(moneyMenu, "Type", "Cash", "Bank")
 Dialog.addSelect(moneyMenu, "Player")
 Dialog.addTextInput(moneyMenu, "Amount")
+local vehicleMenu = Dialog.create("Spawn Vehicle", nil, "Spawn", "Cancel")
+Dialog.addSelect(vehicleMenu, "Model", table.unpack(vehicleModels))
+Dialog.addTextInput(vehicleMenu, "License Plate")
 
 local function makePlayerOptions()
     local buttons = {}
@@ -87,7 +118,7 @@ local function isDigit(letter)
     return false
 end
 
-local function parsePlayerOptionId(option)
+local function parseOptionId(option)
     local pt = #option - 1
     local str = ""
     while pt > 0 do
@@ -115,6 +146,10 @@ AddEvent("OnDialogSubmit", function(dialog, button, ...)
         if option == "Give Money" then
             Dialog.setSelectOptions(moneyMenu, 2, table.unpack(makePlayerOptions()))
             Dialog.show(moneyMenu)
+            return
+        end
+        if option == "Spawn Vehicle" then
+            Dialog.show(vehicleMenu)
             return
         end
     end
@@ -167,7 +202,14 @@ AddEvent("OnDialogSubmit", function(dialog, button, ...)
     if dialog == moneyMenu then
         local args = {...}
         if button == 1 then
-            CallRemoteEvent("AdminAddMoney", parsePlayerOptionId(args[2]), args[1], tonumber(args[3]))
+            CallRemoteEvent("AdminAddMoney", parseOptionId(args[2]), args[1], tonumber(args[3]))
+        end
+        return
+    end
+    if dialog == vehicleMenu then
+        local args = {...}
+        if button == 1 then
+            CallRemoteEvent("AdminSpawnVehicle", parseOptionId(args[1]), args[2])
         end
         return
     end

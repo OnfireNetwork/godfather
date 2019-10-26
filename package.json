@@ -6,12 +6,14 @@
 		"config.lua",
 		"spawn/server.lua",
 		"atm/server.lua",
-		"admin/server.lua"
+		"admin/server.lua",
+		"vehicles/server.lua"
 	],
 	"client_scripts": [
 		"atm/client.lua",
 		"admin/client.lua",
-		"hud/client.lua"
+		"hud/client.lua",
+		"vehicles/client.lua"
 	],
 	"files": [
 		"hud/hud.html",

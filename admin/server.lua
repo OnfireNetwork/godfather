@@ -45,3 +45,14 @@ AddRemoteEvent("AdminAddMoney", function(player, target, type, amount)
         return
     end
 end)
+
+AddRemoteEvent("AdminSpawnVehicle", function(player, model, plate)
+    if not isAdmin(player) then
+        return
+    end
+    local vehicle = CreateVehicle(model, GetPlayerLocation(player))
+    SetVehicleLicensePlate(vehicle, plate)
+    SetVehiclePropertyValue(vehicle, "owner", -1, true)
+    SetVehiclePropertyValue(vehicle, "locked", false, true)
+    SetPlayerInVehicle(player, vehicle)
+end)
