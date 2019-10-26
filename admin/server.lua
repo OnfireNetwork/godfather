@@ -10,9 +10,17 @@ AddCommand("admin", function(player)
     CallRemoteEvent(player, "OpenAdminMenu")
 end)
 
+-- to be removed (just for debugging)
+AddCommand("anim", function(player, anim)
+    SetPlayerAnimation(player, anim)
+end)
+
 AddRemoteEvent("AdminTeleport", function(player, id, x, y, z)
     if not isAdmin(player) then
         return
+    end
+    if GetPlayerDimension(id) ~= 0 then
+        SetPlayerDimension(id, 0)
     end
     SetPlayerLocation(id, x, y, z)
 end)
@@ -22,6 +30,9 @@ AddRemoteEvent("AdminTeleportPlayer", function(player, id, target)
         return
     end
     local x, y, z = GetPlayerLocation(target)
+    if GetPlayerDimension(id) ~= GetPlayerDimension(target) then
+        SetPlayerDimension(id, GetPlayerDimension(target))
+    end
     SetPlayerLocation(id, x, y, z+100)
 end)
 
@@ -29,28 +40,54 @@ AddRemoteEvent("AdminAddMoney", function(player, target, type, amount)
     if not isAdmin(player) then
         return
     end
-    if player_data[target] == nil then
-        return
+    local targets = {}
+    if target == 0 then
+        for k,v in pairs(player_data) do
+            table.insert(targets, k)
+        end
+    else
+        if player_data[target] == nil then
+            return
+        end
+        targets = {target}
     end
     if type == "Cash" then
-        player_data[target].cash = player_data[target].cash + amount
-        SetPlayerPropertyValue(target, "cash", player_data[target].cash, true)
+        for i=1,#targets do
+            player_data[targets[i]].cash = player_data[targets[i]].cash + amount
+            SetPlayerPropertyValue(targets[i], "cash", player_data[targets[i]].cash, true)
+        end
         AddPlayerChat(player, "Added cash successfully!")
         return
     end
     if type == "Bank" then
-        player_data[target].balance = player_data[target].balance + amount
-        SetPlayerPropertyValue(target, "balance", player_data[target].balance, true)
+        for i=1,#targets do
+            player_data[targets[i]].balance = player_data[targets[i]].balance + amount
+            SetPlayerPropertyValue(targets[i], "balance", player_data[targets[i]].balance, true)
+        end
         AddPlayerChat(player, "Added balance successfully!")
         return
     end
 end)
 
-AddRemoteEvent("AdminGiveWeapon", function(player, weapon, slot, ammo, equip)
+AddRemoteEvent("AdminGiveWeapon", function(player, target, weapon, slot, ammo, equip)
     if not isAdmin(player) then
         return
     end
-    SetPlayerWeapon(player, weapon, ammo, equip, slot)
+    local targets = {}
+    if target == 0 then
+        for k,v in pairs(player_data) do
+            table.insert(targets, k)
+        end
+    else
+        if player_data[target] == nil then
+            return
+        end
+        targets = {target}
+    end
+    for i=1,#targets do
+        SetPlayerWeapon(targets[i], weapon, ammo, equip, slot)
+    end
+    AddPlayerChat(player, "Weapon set successfully!")
 end)
 
 AddRemoteEvent("AdminSpawnVehicle", function(player, model, plate, nitro)

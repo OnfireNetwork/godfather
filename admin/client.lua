@@ -125,16 +125,20 @@ Dialog.addSelect(vehicleMenu, "Model", table.unpack(vehicleModels))
 Dialog.addTextInput(vehicleMenu, "License Plate")
 Dialog.addCheckbox(vehicleMenu, "Nitro")
 local weaponMenu = Dialog.create("Give Weapon", nil, "Give", "Cancel")
+Dialog.addSelect(weaponMenu, "Player")
 Dialog.addSelect(weaponMenu, "Weapon", table.unpack(weaponModels))
 Dialog.addSelect(weaponMenu, "Slot", "1", "2", "3")
 Dialog.addTextInput(weaponMenu, "Ammo")
 Dialog.addCheckbox(weaponMenu, "Equip")
 
-local function makePlayerOptions()
+local function makePlayerOptions(allowAll)
     local buttons = {}
     local playerList = GetPlayerPropertyValue(GetPlayerId(), "player_list")
     for k,v in pairs(playerList) do
         table.insert(buttons, v.name.." ("..k..")")
+    end
+    if allowAll == true then
+        table.insert(buttons, "All Players")
     end
     return buttons
 end
@@ -150,6 +154,9 @@ local function isDigit(letter)
 end
 
 local function parseOptionId(option)
+    if option == "All Players" then
+        return 0
+    end
     local pt = #option - 1
     local str = ""
     while pt > 0 do
@@ -175,11 +182,12 @@ AddEvent("OnDialogSubmit", function(dialog, button, ...)
             return
         end
         if option == "Give Money" then
-            Dialog.setSelectOptions(moneyMenu, 2, table.unpack(makePlayerOptions()))
+            Dialog.setSelectOptions(moneyMenu, 2, table.unpack(makePlayerOptions(true)))
             Dialog.show(moneyMenu)
             return
         end
         if option == "Give Weapon" then
+            Dialog.setSelectOptions(weaponMenu, 1, table.unpack(makePlayerOptions(true)))
             Dialog.show(weaponMenu)
             return
         end
@@ -244,7 +252,7 @@ AddEvent("OnDialogSubmit", function(dialog, button, ...)
     if dialog == weaponMenu then
         local args = {...}
         if button == 1 then
-            CallRemoteEvent("AdminGiveWeapon", parseOptionId(args[1]), tonumber(args[2]), tonumber(args[3]), args[4])
+            CallRemoteEvent("AdminGiveWeapon", parseOptionId(args[1]), parseOptionId(args[2]), tonumber(args[3]), tonumber(args[4]), args[5])
         end
         return
     end
