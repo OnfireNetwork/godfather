@@ -6,6 +6,7 @@ SetWebURL(web, "http://asset/godfather/hud/hud.html")
 SetWebVisibility(web, WEB_HITINVISIBLE)
 CreateTimer(function(player)
     ExecuteWebJS(web, "SetCash("..GetPlayerPropertyValue(player, "cash")..");")
+    
 end, 1000, GetPlayerId())
 
 AddEvent("OnKeyPress", function(key)

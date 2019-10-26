@@ -1,9 +1,9 @@
 Dialog = Dialog or ImportPackage("dialogui")
 
 local vehicleMenu = Dialog.create("Vehicle Menu", nil, "{refuel}", "{lock}", "{engine}", "Park", "Unflip", "Cancel")
-local refuelMenu = Dialog.create("Vehicle Refuel Menu", nil, "Refuel", "Cancel")
+local refuelMenu = Dialog.create("Refuel", nil, "Refuel", "Cancel")
 Dialog.addTextInput(refuelMenu, "Liter")
-local refuelConfirmMenu = Dialog.create("Vehicle Refuel Confirmation", "This will cost you {price}$ \n Are you sure?", "Yes", "No")
+local refuelConfirmMenu = Dialog.create("Vehicle Refuel Confirmation", "This will cost you {price}$. Are you sure?", "Yes", "No")
 
 local lastVehicle = -1
 local lastLiters = -1
@@ -108,7 +108,11 @@ AddEvent("OnDialogSubmit", function(dialog, button, ...)
                         Dialog.setVariable(refuelConfirmMenu, "price", price)
                         Dialog.show(refuelConfirmMenu)
                     end
+                else
+                    AddPlayerChat("Your tank is too full!")
                 end
+            else
+                AddPlayerChat("Invalid amount!")
             end
         end
         return

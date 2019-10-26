@@ -86,9 +86,11 @@ AddRemoteEvent("VehicleMenuAction", function(player, action, vehicle)
 end)
 
 AddRemoteEvent("VehicleRefuel", function(player, vehicle, liter)
-    local oldFuel = GetVehiclePropertyValue(lastVehicle, "fuel")
-    if number <= 100 - oldFuel then
+    local oldFuel = GetVehiclePropertyValue(vehicle, "fuel")
+    if liter <= 100 - oldFuel then
         SetVehiclePropertyValue(vehicle, "fuel", oldFuel + liter, true)
         AddPlayerChat(player, "Your vehicle got refueled!")
+    else
+        AddPlayerChat("Your tank is too full! (server)")
     end
 end)

@@ -262,7 +262,7 @@ AddEvent("OnDialogSubmit", function(dialog, button, ...)
     if dialog == vehicleMenu then
         local args = {...}
         if button == 1 then
-            CallRemoteEvent("AdminSpawnVehicle", parseOptionId(args[1]), args[2], args[3])
+            CallRemoteEvent("AdminSpawnVehicle", parseOptionId(args[1]), args[2], args[3] == 1)
         end
         return
     end
