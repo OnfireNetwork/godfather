@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            @font-face {
+                font-family: 'Staatliches';
+                src: url(Staatliches-Regular.ttf) format("truetype");
+            }
+            #cash-display {
+                font-family: 'Staatliches', cursive;
+                color: darkgreen;
+                font-size: 40px;
+                position: absolute;
+                top: 3vh;
+                right: 1vw;
+                text-align: right;
+                text-shadow:  1px  1px 1px black,
+                  1px -1px 1px black,
+                 -1px  1px 1px black,
+                 -1px -1px 1px black;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="cash-display">
+            0 $
+        </div>
+        <script>
+            let elements = {
+                cash: document.getElementById("cash-display")
+            };
+            function SetCash(cash){
+
+                elements.cash.innerText = cash + " $"
+            }
+        </script>
+    </body>
+</html>

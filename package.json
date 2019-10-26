@@ -5,10 +5,16 @@
 		"json.lua",
 		"config.lua",
 		"spawn/server.lua",
-		"atm/server.lua"
+		"atm/server.lua",
+		"admin/server.lua"
 	],
 	"client_scripts": [
-		"atm/client.lua"
+		"atm/client.lua",
+		"admin/client.lua",
+		"hud/client.lua"
 	],
-	"files": []
+	"files": [
+		"hud/hud.html",
+		"hud/Staatliches-Regular.ttf"
+	]
 }

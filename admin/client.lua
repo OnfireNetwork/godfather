@@ -1,0 +1,178 @@
+Dialog = Dialog or ImportPackage("dialogui")
+
+local adminMenuOptions = {
+    "Teleport",
+    "Give Money",
+    "Cancel"
+}
+if CopyToClipboard ~= nil then
+    adminMenuOptions = {
+        "Teleport",
+        "Give Money",
+        "Copy Position",
+        "Cancel"
+    }
+end
+
+local teleportPlaces = {
+    {
+        name = "Gas Station",
+        x = 125773,
+        y = 80246,
+        z = 1645
+    },
+    {
+        name = "Town",
+        x = -182821,
+        y = -41675,
+        z = 1160
+    },
+    {
+        name = "Prison",
+        x = -167958,
+        y = 78089,
+        z = 1569
+    },
+    {
+        name = "Airport",
+        x = 168904.359375,
+        y = -148973.796875,
+        z = 1250.2750244141
+    },
+    {
+        name = "Diner",
+        x = 212405,
+        y = 94489,
+        z = 1340
+    }
+}
+local teleportPlaceNames = {}
+for i=1,#teleportPlaces do
+    table.insert(teleportPlaceNames, teleportPlaces[i].name)
+end
+table.insert(teleportPlaceNames, "Cancel")
+
+local adminMenu = Dialog.create("Admin", nil, table.unpack(adminMenuOptions))
+local teleportMenu = Dialog.create("Teleport", nil, "To Place", "To Coords", "To Player", "Teleport Player", "Cancel")
+local teleportPlaceMenu = Dialog.create("Places", "Select a place to teleport to", table.unpack(teleportPlaceNames))
+local teleportCoordsMenu = Dialog.create("Coords", "Enter coords to teleport to", "Teleport", "Cancel")
+Dialog.addTextInput(teleportCoordsMenu, "X")
+Dialog.addTextInput(teleportCoordsMenu, "Y")
+Dialog.addTextInput(teleportCoordsMenu, "Z")
+local teleportToPlayerMenu = Dialog.create("Players", "Select a player to teleport to", "Teleport", "Cancel")
+Dialog.addSelect(teleportToPlayerMenu, "Player")
+local teleportPlayerMenu = Dialog.create("Players", "Select a player to teleport to you", "Teleport", "Cancel")
+Dialog.addSelect(teleportPlayerMenu, "Player")
+local moneyMenu = Dialog.create("Give Money", nil, "Give", "Cancel")
+Dialog.addSelect(moneyMenu, "Type", "Cash", "Bank")
+Dialog.addSelect(moneyMenu, "Player")
+Dialog.addTextInput(moneyMenu, "Amount")
+
+local function makePlayerOptions()
+    local buttons = {}
+    local playerList = GetPlayerPropertyValue(GetPlayerId(), "player_list")
+    for k,v in pairs(playerList) do
+        table.insert(buttons, v.name.." ("..k..")")
+    end
+    return buttons
+end
+
+local function isDigit(letter)
+    local digits = "0123456789"
+    for i=1,#digits do
+        if digits:sub(i,i) == letter then
+            return true
+        end
+    end
+    return false
+end
+
+local function parsePlayerOptionId(option)
+    local pt = #option - 1
+    local str = ""
+    while pt > 0 do
+        if not isDigit(option:sub(pt,pt)) then
+            break
+        end
+        str = option:sub(pt,pt)..str
+        pt = pt - 1
+    end
+    return tonumber(str)
+end
+
+AddEvent("OnDialogSubmit", function(dialog, button, ...)
+    if dialog == adminMenu then
+        local option = adminMenuOptions[button]
+        if option == "Copy Position" then
+            local x, y, z = GetPlayerLocation()
+            CopyToClipboard(x..", "..y..", "..z)
+            return
+        end
+        if option == "Teleport" then
+            Dialog.show(teleportMenu)
+            return
+        end
+        if option == "Give Money" then
+            Dialog.setSelectOptions(moneyMenu, 2, table.unpack(makePlayerOptions()))
+            Dialog.show(moneyMenu)
+            return
+        end
+    end
+    if dialog == teleportMenu then
+        if button == 1 then
+            Dialog.show(teleportPlaceMenu)
+        end
+        if button == 2 then
+            Dialog.show(teleportCoordsMenu)
+        end
+        if button == 3 then
+            Dialog.setSelectOptions(teleportToPlayerMenu, 1, table.unpack(makePlayerOptions()))
+            Dialog.show(teleportToPlayerMenu)
+        end
+        if button == 4 then
+            Dialog.setSelectOptions(teleportPlayerMenu, 1, table.unpack(makePlayerOptions()))
+            Dialog.show(teleportPlayerMenu)
+        end
+        return
+    end
+    if dialog == teleportPlaceMenu then
+        if button <= #teleportPlaces then
+            CallRemoteEvent("AdminTeleport", GetPlayerId(), teleportPlaces[button].x, teleportPlaces[button].y, teleportPlaces[button].z)
+        end
+        return
+    end
+    if dialog == teleportCoordsMenu then
+        if button == 1 then
+            local args = {...}
+            CallRemoteEvent("AdminTeleport", GetPlayerId(), tonumber(args[1]), tonumber(args[2]), tonumber(args[3]))
+        end
+        return
+    end
+    if dialog == teleportToPlayerMenu then
+        if button == 1 then
+            local args = {...}
+            local id = parsePlayerOptionId(args[1])
+            CallRemoteEvent("AdminTeleportPlayer", GetPlayerId(), id)
+        end
+        return
+    end
+    if dialog == teleportPlayerMenu then
+        if button == 1 then
+            local args = {...}
+            local id = parsePlayerOptionId(args[1])
+            CallRemoteEvent("AdminTeleportPlayer", id, GetPlayerId())
+        end
+        return
+    end
+    if dialog == moneyMenu then
+        local args = {...}
+        if button == 1 then
+            CallRemoteEvent("AdminAddMoney", parsePlayerOptionId(args[2]), args[1], tonumber(args[3]))
+        end
+        return
+    end
+end)
+
+AddRemoteEvent("OpenAdminMenu", function()
+    Dialog.show(adminMenu)
+end)

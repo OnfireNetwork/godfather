@@ -1,8 +1,9 @@
-local atms = {
-    {129146, 77939, 1576}
-}
+Dialog = Dialog or ImportPackage("dialogui")
 
-local Dialog = ImportPackage("dialogui")
+local atms = {
+    {129146, 77939, 1576},
+    {-181957.5625, -40253.48046875, 1163.1500244141}
+}
 
 local startMenu = Dialog.create("ATM", "Choose an action", "Deposit", "Withdraw", "Exit")
 local depositMenu = Dialog.create("Deposit", "Balance: {balance} $", "Deposit", "Cancel")
@@ -12,22 +13,7 @@ local withdrawMenu = Dialog.create("Withdraw", "Balance: {balance} $", "Withdraw
 Dialog.addTextInput(withdrawMenu, "Amount")
 Dialog.setVariable(withdrawMenu, "balance", 0)
 
-local function isDigit(letter)
-    local digits = "0123456789"
-    for i=1,#digits do
-        if digits[i] == letter then
-            return true
-        end
-    end
-    return false
-end
-
 local function parseAmount(source)
-    for i=1,#source do
-        if not isDigit(source[i]) then
-            return nil
-        end
-    end
     return tonumber(source)
 end
 

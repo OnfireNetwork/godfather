@@ -37,10 +37,28 @@ AddEvent("OnPlayerSteamAuth", function(player)
     end)
 end)
 
+local function updatePlayerList()
+    local playerList = {}
+    for k,v in pairs(player_data) do
+        playerList[k] = {
+            name = v.name
+        }
+    end
+    local ids = GetAllPlayers()
+    for i=1,#ids do
+        SetPlayerPropertyValue(ids[i], "player_list", playerList, true)
+    end
+end
+
+AddEvent("OnPlayerDataReady", function(player, data)
+    updatePlayerList()
+end)
+
 AddEvent("OnPlayerQuit", function(player)
     if player_data[player] == nil then
         return
     end
     mariadb_query(db, "UPDATE players SET cash='"..player_data[player].cash.."',balance='"..player_data[player].balance.."' WHERE id='"..player_data[player].db.."';")
     player_data[player] = nil
+    updatePlayerList()
 end)
