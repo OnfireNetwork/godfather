@@ -46,6 +46,13 @@ AddRemoteEvent("AdminAddMoney", function(player, target, type, amount)
     end
 end)
 
+AddRemoteEvent("AdminGiveWeapon", function(player, weapon, slot, ammo, equip)
+    if not isAdmin(player) then
+        return
+    end
+    SetPlayerWeapon(player, weapon, ammo, equip, slot)
+end)
+
 AddRemoteEvent("AdminSpawnVehicle", function(player, model, plate, nitro)
     if not isAdmin(player) then
         return

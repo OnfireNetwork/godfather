@@ -3,6 +3,7 @@ Dialog = Dialog or ImportPackage("dialogui")
 local adminMenuOptions = {
     "Teleport",
     "Give Money",
+    "Give Weapon",
     "Spawn Vehicle",
     "Cancel"
 }
@@ -10,6 +11,7 @@ if CopyToClipboard ~= nil then
     adminMenuOptions = {
         "Teleport",
         "Give Money",
+        "Give Weapon",
         "Spawn Vehicle",
         "Copy Position",
         "Cancel"
@@ -80,6 +82,29 @@ local vehicleModels = {
     "Helicopter Onecolor (20)"
 }
 
+local weaponModels = {
+    "Fist (1)",
+    "Deagle (2)",
+    "M1911 (3)",
+    "Glock (4)",
+    "Beretta (5)",
+    "Modern shotgun (6)",
+    "Shotgun (7)",
+    "MP5 (8)",
+    "MAC10 (9)",
+    "UMP45 (10)",
+    "M16 (11)",
+    "AK-47 (12)",
+    "AK-47 Gold (13)",
+    "G36 (14)",
+    "VAL (15)",
+    "AKS (16)",
+    "FAL (17)",
+    "MK16 (18)",
+    "HK416 (19)",
+    "AWP (20)"
+}
+
 local adminMenu = Dialog.create("Admin", nil, table.unpack(adminMenuOptions))
 local teleportMenu = Dialog.create("Teleport", nil, "To Place", "To Coords", "To Player", "Teleport Player", "Cancel")
 local teleportPlaceMenu = Dialog.create("Places", "Select a place to teleport to", table.unpack(teleportPlaceNames))
@@ -99,6 +124,11 @@ local vehicleMenu = Dialog.create("Spawn Vehicle", nil, "Spawn", "Cancel")
 Dialog.addSelect(vehicleMenu, "Model", table.unpack(vehicleModels))
 Dialog.addTextInput(vehicleMenu, "License Plate")
 Dialog.addCheckbox(vehicleMenu, "Nitro")
+local weaponMenu = Dialog.create("Give Weapon", nil, "Give", "Cancel")
+Dialog.addSelect(weaponMenu, "Weapon", table.unpack(weaponModels))
+Dialog.addSelect(weaponMenu, "Slot", "1", "2", "3")
+Dialog.addTextInput(weaponMenu, "Ammo")
+Dialog.addCheckbox(weaponMenu, "Equip")
 
 local function makePlayerOptions()
     local buttons = {}
@@ -147,6 +177,10 @@ AddEvent("OnDialogSubmit", function(dialog, button, ...)
         if option == "Give Money" then
             Dialog.setSelectOptions(moneyMenu, 2, table.unpack(makePlayerOptions()))
             Dialog.show(moneyMenu)
+            return
+        end
+        if option == "Give Weapon" then
+            Dialog.show(weaponMenu)
             return
         end
         if option == "Spawn Vehicle" then
@@ -204,6 +238,13 @@ AddEvent("OnDialogSubmit", function(dialog, button, ...)
         local args = {...}
         if button == 1 then
             CallRemoteEvent("AdminAddMoney", parseOptionId(args[2]), args[1], tonumber(args[3]))
+        end
+        return
+    end
+    if dialog == weaponMenu then
+        local args = {...}
+        if button == 1 then
+            CallRemoteEvent("AdminGiveWeapon", parseOptionId(args[1]), tonumber(args[2]), tonumber(args[3]), args[4])
         end
         return
     end
