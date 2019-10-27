@@ -13,11 +13,11 @@ local radioStations = {
 
 local vehicleMenu = Dialog.create("Vehicle Menu", nil, "{lock}", "{engine}", "{refuel}", "{radio}", "Park", "Unflip", "Cancel")
 local refuelMenu = Dialog.create("Refuel", nil, "Refuel", "Cancel")
-Dialog.addTextInput(refuelMenu, "Liter")
+Dialog.addTextInput(refuelMenu, 1, "Liter")
 local refuelConfirmMenu = Dialog.create("Refuel Confirmation", "Refueling will cost you {price} $. Are you sure?", "Yes", "No")
 local radioMenu = Dialog.create("Vehicle Radio", nil, "Set Station", "Cancel")
-Dialog.addSelect(radioMenu, "Station", "None", "KIIS FM", "KOST FM")
-Dialog.addSelect(radioMenu, "Volume", "100%", "75%", "50%", "25%", "10%")
+Dialog.addSelect(radioMenu, 1, "Station", 1, "None", "KIIS FM", "KOST FM")
+Dialog.addSelect(radioMenu, 1, "Volume", 1, "100%", "75%", "50%", "25%", "10%")
 
 local radioSound = -1
 local radioStation = 0

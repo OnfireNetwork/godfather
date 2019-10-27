@@ -109,28 +109,28 @@ local adminMenu = Dialog.create("Admin", nil, table.unpack(adminMenuOptions))
 local teleportMenu = Dialog.create("Teleport", nil, "To Place", "To Coords", "To Player", "Teleport Player", "Teleport All", "Cancel")
 local teleportPlaceMenu = Dialog.create("Places", "Select a place to teleport to", table.unpack(teleportPlaceNames))
 local teleportCoordsMenu = Dialog.create("Coords", "Enter coords to teleport to", "Teleport", "Cancel")
-Dialog.addTextInput(teleportCoordsMenu, "X")
-Dialog.addTextInput(teleportCoordsMenu, "Y")
-Dialog.addTextInput(teleportCoordsMenu, "Z")
+Dialog.addTextInput(teleportCoordsMenu, 1, "X")
+Dialog.addTextInput(teleportCoordsMenu, 1, "Y")
+Dialog.addTextInput(teleportCoordsMenu, 1, "Z")
 local teleportToPlayerMenu = Dialog.create("Players", "Select a player to teleport to", "Teleport", "Cancel")
-Dialog.addSelect(teleportToPlayerMenu, "Player")
+Dialog.addSelect(teleportToPlayerMenu, 1, "Player", 1)
 local teleportPlayerMenu = Dialog.create("Players", "Select a player to teleport to you", "Teleport", "Cancel")
-Dialog.addSelect(teleportPlayerMenu, "Player")
+Dialog.addSelect(teleportPlayerMenu, 1, "Player", 1)
 local moneyMenu = Dialog.create("Give Money", nil, "Give", "Cancel")
-Dialog.addSelect(moneyMenu, "Type", "Cash", "Bank")
-Dialog.addSelect(moneyMenu, "Player")
-Dialog.addTextInput(moneyMenu, "Amount")
+Dialog.addSelect(moneyMenu, 1, "Type", 1, "Cash", "Bank")
+Dialog.addSelect(moneyMenu, 1, "Player", 1)
+Dialog.addTextInput(moneyMenu, 1, "Amount")
 local vehicleMenu = Dialog.create("Spawn Vehicle", nil, "Spawn", "Cancel")
-Dialog.addSelect(vehicleMenu, "Model", table.unpack(vehicleModels))
-Dialog.addTextInput(vehicleMenu, "License Plate")
-Dialog.addCheckbox(vehicleMenu, "Radio")
-Dialog.addCheckbox(vehicleMenu, "Nitro")
+Dialog.addSelect(vehicleMenu, 1, "Model", 1, table.unpack(vehicleModels))
+Dialog.addTextInput(vehicleMenu, 1, "License Plate")
+Dialog.addCheckbox(vehicleMenu, 1, "Radio")
+Dialog.addCheckbox(vehicleMenu, 1, "Nitro")
 local weaponMenu = Dialog.create("Give Weapon", nil, "Give", "Cancel")
-Dialog.addSelect(weaponMenu, "Player")
-Dialog.addSelect(weaponMenu, "Weapon", table.unpack(weaponModels))
-Dialog.addSelect(weaponMenu, "Slot", "1", "2", "3")
-Dialog.addTextInput(weaponMenu, "Ammo")
-Dialog.addCheckbox(weaponMenu, "Equip")
+Dialog.addSelect(weaponMenu, 1, "Player", 1)
+Dialog.addSelect(weaponMenu, 1, "Weapon", 1, table.unpack(weaponModels))
+Dialog.addSelect(weaponMenu, 1, "Slot", 1, "1", "2", "3")
+Dialog.addTextInput(weaponMenu, 1, "Ammo")
+Dialog.addCheckbox(weaponMenu, 1, "Equip")
 
 local function makePlayerOptions(allowAll)
     local buttons = {}
@@ -183,12 +183,12 @@ AddEvent("OnDialogSubmit", function(dialog, button, ...)
             return
         end
         if option == "Give Money" then
-            Dialog.setSelectOptions(moneyMenu, 2, table.unpack(makePlayerOptions(true)))
+            Dialog.setSelectOptions(moneyMenu, 1, 2, table.unpack(makePlayerOptions(true)))
             Dialog.show(moneyMenu)
             return
         end
         if option == "Give Weapon" then
-            Dialog.setSelectOptions(weaponMenu, 1, table.unpack(makePlayerOptions(true)))
+            Dialog.setSelectOptions(weaponMenu, 1, 1, table.unpack(makePlayerOptions(true)))
             Dialog.show(weaponMenu)
             return
         end
@@ -205,11 +205,11 @@ AddEvent("OnDialogSubmit", function(dialog, button, ...)
             Dialog.show(teleportCoordsMenu)
         end
         if button == 3 then
-            Dialog.setSelectOptions(teleportToPlayerMenu, 1, table.unpack(makePlayerOptions()))
+            Dialog.setSelectOptions(teleportToPlayerMenu, 1, 1, table.unpack(makePlayerOptions()))
             Dialog.show(teleportToPlayerMenu)
         end
         if button == 4 then
-            Dialog.setSelectOptions(teleportPlayerMenu, 1, table.unpack(makePlayerOptions()))
+            Dialog.setSelectOptions(teleportPlayerMenu, 1, 1, table.unpack(makePlayerOptions()))
             Dialog.show(teleportPlayerMenu)
         end
         if button == 5 then
@@ -270,5 +270,6 @@ AddEvent("OnDialogSubmit", function(dialog, button, ...)
 end)
 
 AddRemoteEvent("OpenAdminMenu", function()
+    print("Showing Admin Menu")
     Dialog.show(adminMenu)
 end)

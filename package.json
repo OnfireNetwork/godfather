@@ -13,7 +13,8 @@
 		"atm/client.lua",
 		"admin/client.lua",
 		"hud/client.lua",
-		"vehicles/client.lua"
+		"vehicles/client.lua",
+		"inventory/client.lua"
 	],
 	"files": [
 		"hud/hud.html",

@@ -7,10 +7,10 @@ local atms = {
 
 local startMenu = Dialog.create("ATM", "Choose an action", "Deposit", "Withdraw", "Exit")
 local depositMenu = Dialog.create("Deposit", "Balance: {balance} $", "Deposit", "Cancel")
-Dialog.addTextInput(depositMenu, "Amount")
+Dialog.addTextInput(depositMenu, 1, "Amount")
 Dialog.setVariable(depositMenu, "balance", 0)
 local withdrawMenu = Dialog.create("Withdraw", "Balance: {balance} $", "Withdraw", "Cancel")
-Dialog.addTextInput(withdrawMenu, "Amount")
+Dialog.addTextInput(withdrawMenu, 1, "Amount")
 Dialog.setVariable(withdrawMenu, "balance", 0)
 
 local function parseAmount(source)
