@@ -14,7 +14,8 @@
 		"admin/client.lua",
 		"hud/client.lua",
 		"vehicles/client.lua",
-		"inventory/client.lua"
+		"inventory/client.lua",
+		"test.lua"
 	],
 	"files": [
 		"hud/hud.html",

@@ -113,6 +113,7 @@ AddEvent("OnPlayerDataReady", function(player, data)
                 entity = -1,
                 model = mariadb_get_value_name_int(row, "model"),
                 color = mariadb_get_value_name_int(row, "color"),
+                license = mariadb_get_value_name(row, "license"),
                 towed = mariadb_get_value_name_int(row, "towed") == 1,
                 nitro = mariadb_get_value_name_int(row, "nitro") == 1,
                 radio = mariadb_get_value_name_int(row, "radio") == 1,
@@ -128,6 +129,11 @@ AddEvent("OnPlayerDataReady", function(player, data)
                 SetVehicleColor(playerVehicle.entity, playerVehicle.color)
                 AttachVehicleNitro(playerVehicle.entity, playerVehicle.nitro)
                 SetVehicleHealth(playerVehicle.entity, playerVehicle.health)
+                if playerVehicle.license:len() == 0 then
+                    SetVehicleLicensePlate(playerVehicle.entity, " ")
+                else
+                    SetVehicleLicensePlate(playerVehicle.entity, playerVehicle.license)
+                end
                 SetVehiclePropertyValue(playerVehicle.entity, "owner", player, true)
                 SetVehiclePropertyValue(playerVehicle.entity, "fuel", playerVehicle.fuel, true)
                 SetVehiclePropertyValue(playerVehicle.entity, "locked", true, true)
@@ -140,7 +146,7 @@ AddEvent("OnPlayerDataReady", function(player, data)
     end)
 end)
 
-AddEvent("OnPlayerQuit", function(player)
+AddEvent("OnPlayerDataFinish", function(player)
     for i=1,#player_data[player].vehicles do
         local playerVehicle = player_data[player].vehicles[i]
         if not playerVehicle.towed then
