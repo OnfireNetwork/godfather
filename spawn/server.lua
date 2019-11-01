@@ -62,3 +62,22 @@ AddEvent("OnPlayerQuit", function(player)
     player_data[player] = nil
     updatePlayerList()
 end)
+
+CreateTimer(60000, function()
+    for i,v in pairs(player_data) do
+        player_data[i].payday = player_data[i].payday + 1
+        if player_data[i].payday == 60 then
+            player_data[i].payday = 0
+            player_data[i].xp = player_data[i].xp + 1
+            AddPlayerChat(i, "------------------------------")
+            AddPlayerChat(i, "            PayDay")
+            AddPlayerChat(i, " Old Balance: "..player_data[i].balance)
+            player_data[i].balance = player_data[i].balance + player_data[i].salary
+            SetPlayerPropertyValue(i, "balance", player_data[i].balance, true)
+            AddPlayerChat(i, " Salary: "..player_data[i].salary)
+            AddPlayerChat(i, " New Balance: "..player_data[i].balance)
+            AddPlayerChat(i, "------------------------------")
+            player_data[i].salary = 0
+        end
+    end
+end)
