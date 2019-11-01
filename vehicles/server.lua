@@ -60,7 +60,17 @@ AddRemoteEvent("VehicleMenuAction", function(player, action, vehicle)
                 return
             end
         end
-        AddPlayerChat(player, "Parking isn't implemented yet!")
+        local x, y, z = GetVehicleLocation(vehicle)
+        for i=1,#player_data[owner].vehicles do
+            if player_data[owner].vehicles[i].entity == vehicle then
+                player_data[owner].vehicles[i].x = x
+                player_data[owner].vehicles[i].y = y
+                player_data[owner].vehicles[i].z = z
+                player_data[owner].vehicles[i].heading = GetVehicleHeading(vehicle)
+                mariadb_query(db, "UPDATE player_vehicles SET x='"..x.."',y='"..y.."',z='"..z.."',heading='"..player_data[owner].vehicles[i].heading.."' WHERE id='"..player_data[owner].vehicles[i].id.."';")
+                AddPlayerChat(player, "The vehicle has been parked!")
+            end
+        end
         return
     end
     if action == "Unflip" then
