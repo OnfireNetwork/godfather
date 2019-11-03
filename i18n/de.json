@@ -48,7 +48,7 @@
     "withdraw": "Auszahlen",
     "global_chat_disabled": "Der globale Chat wurde deaktiviert!",
     "global_chat_enabled": "Der globale Chat wurde aktiviert!",
-    "global_chat_is_disabled": "Der globale Chat is deaktiviert!",
+    "global_chat_is_disabled": "Der globale Chat ist deaktiviert!",
     "all_players": "Alle Spieler",
     "weapon": "Waffe",
     "player": "Spieler",
@@ -68,5 +68,6 @@
     "give_weapon": "Waffe geben",
     "give_money": "Geld geben",
     "amount": "Betrag",
-    "players": "Spieler"
+    "players": "Spieler",
+    "config_save_failed": "Konfigurationsdatei konnte nicht geschrieben werden!"
 }
