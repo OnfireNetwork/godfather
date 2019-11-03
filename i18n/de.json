@@ -75,5 +75,6 @@
     "inventory": "Inventar",
     "payday_phone_bill": "Handyrechnung",
     "inventory_gave_to_player": "Du hast {1} {3} {2} gegeben!",
-    "inventory_got_by_player": "{1} hat dir {3} {2} gegeben!"
+    "inventory_got_by_player": "{1} hat dir {3} {2} gegeben!",
+    "inventory_other_cannot_carry": "Der andere Spieler kann so viel nicht tragen!"
 }
