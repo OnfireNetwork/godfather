@@ -17,13 +17,18 @@ AddEvent("OnPlayerSteamAuth", function(player)
                 xp = mariadb_get_value_name_int(1, "xp"),
                 payday = mariadb_get_value_name_int(1, "payday"),
                 salary = mariadb_get_value_name_int(1, "salary"),
-                first_join = false
+                first_join = false,
+                phone_bill = mariadb_get_value_name_int(1, "phone_bill"),
+                inventory = json_decode(mariadb_get_value_name(1, "inventory")),
+                licenses = json_decode(mariadb_get_value_name(1, "licenses"))
             }
             SetPlayerPropertyValue(player, "cash", player_data[player].cash, true)
             SetPlayerPropertyValue(player, "balance", player_data[player].balance, true)
+            SetPlayerPropertyValue(player, "inventory", player_data[player].inventory, true)
+            SetPlayerPropertyValue(player, "licenses", player_data[player].licenses, true)
             CallEvent("OnPlayerDataReady", player, player_data[player])
         else
-            mariadb_query(db, "INSERT INTO players (steam_id,name) VALUES ('"..steamId.."','"..GetPlayerName(player).."');", function()
+            mariadb_query(db, "INSERT INTO players (steam_id,name,inventory,licenses) VALUES ('"..steamId.."','"..GetPlayerName(player).."','{}','{}');", function()
                 player_data[player] = {
                     db = mariadb_get_insert_id(),
                     steam = steamId,
@@ -33,10 +38,15 @@ AddEvent("OnPlayerSteamAuth", function(player)
                     xp = 0,
                     payday = 0,
                     salary = 0,
-                    first_join = true
+                    first_join = true,
+                    phone_bill = 0,
+                    inventory = {},
+                    licenses = {}
                 }
                 SetPlayerPropertyValue(player, "cash", player_data[player].cash, true)
                 SetPlayerPropertyValue(player, "balance", player_data[player].balance, true)
+                SetPlayerPropertyValue(player, "inventory", player_data[player].inventory, true)
+                SetPlayerPropertyValue(player, "licenses", player_data[player].licenses, true)
                 CallEvent("OnPlayerDataReady", player, player_data[player])
             end)
         end
@@ -60,12 +70,16 @@ AddEvent("OnPlayerDataReady", function(player, data)
     updatePlayerList()
 end)
 
+function GFSavePlayerData(player)
+    mariadb_query(db, "UPDATE players SET cash='"..player_data[player].cash.."',balance='"..player_data[player].balance.."',xp='"..player_data[player].xp.."',payday='"..player_data[player].payday.."',salary='"..player_data[player].salary.."',phone_bill='"..player_data[player].phone_bill.."',inventory='"..json_encode(player_data[player].inventory).."',licenses='"..json_encode(player_data[player].licenses).."' WHERE id='"..player_data[player].db.."';")
+end
+
 AddEvent("OnPlayerQuit", function(player)
     if player_data[player] == nil then
         return
     end
     CallEvent("OnPlayerDataFinish", player)
-    mariadb_query(db, "UPDATE players SET cash='"..player_data[player].cash.."',balance='"..player_data[player].balance.."',xp='"..player_data[player].xp.."',payday='"..player_data[player].payday.."',salary='"..player_data[player].salary.."' WHERE id='"..player_data[player].db.."';")
+    GFSavePlayerData(player)
     player_data[player] = nil
     updatePlayerList()
 end)
@@ -80,12 +94,14 @@ CreateTimer(function()
             AddPlayerChat(i, "                                  ".._("payday"))
             AddPlayerChat(i, "-----------------------------------------------------------------------------")
             AddPlayerChat(i, "  ".._("payday_old_balance")..": "..player_data[i].balance.." ".._("currency_symbol"))
-            player_data[i].balance = player_data[i].balance + player_data[i].salary
+            player_data[i].balance = player_data[i].balance + player_data[i].salary - player_data[i].phone_bill
             SetPlayerPropertyValue(i, "balance", player_data[i].balance, true)
             AddPlayerChat(i, "  ".._("payday_salary")..": +"..player_data[i].salary.." ".._("currency_symbol"))
+            AddPlayerChat(i, "  ".._("payday_phone_bill")..": +"..player_data[i].phone_bill.." ".._("currency_symbol"))
             AddPlayerChat(i, "  ".._("payday_new_balance")..": "..player_data[i].balance.." ".._("currency_symbol"))
             AddPlayerChat(i, "-----------------------------------------------------------------------------")
             player_data[i].salary = 0
+            player_data[i].phone_bill = 0
         end
     end
 end, 60000)

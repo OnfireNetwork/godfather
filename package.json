@@ -10,7 +10,8 @@
 		"admin/server.lua",
 		"vehicles/server.lua",
 		"chat/server.lua",
-		"environment/server.lua"
+		"environment/server.lua",
+		"inventory/server.lua"
 	],
 	"client_scripts": [
 		"atm/client.lua",
