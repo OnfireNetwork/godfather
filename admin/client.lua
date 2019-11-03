@@ -1,4 +1,5 @@
 Dialog = Dialog or ImportPackage("dialogui")
+_ = _ or function(k,...) return ImportPackage("i18n").t(GetPackageName(),k,...) end
 
 local adminMenuOptions = {
     "Teleport",
@@ -270,6 +271,5 @@ AddEvent("OnDialogSubmit", function(dialog, button, ...)
 end)
 
 AddRemoteEvent("OpenAdminMenu", function()
-    print("Showing Admin Menu")
     Dialog.show(adminMenu)
 end)

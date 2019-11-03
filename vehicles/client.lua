@@ -1,4 +1,5 @@
 Dialog = Dialog or ImportPackage("dialogui")
+_ = _ or function(k,...) return ImportPackage("i18n").t(GetPackageName(),k,...) end
 
 local radioStations = {
     {
@@ -11,13 +12,20 @@ local radioStations = {
     }
 }
 
-local vehicleMenu = Dialog.create("Vehicle Menu", nil, "{lock}", "{engine}", "{refuel}", "{radio}", "Park", "Unflip", "Cancel")
-local refuelMenu = Dialog.create("Refuel", nil, "Refuel", "Cancel")
-Dialog.addTextInput(refuelMenu, 1, "Liter")
-local refuelConfirmMenu = Dialog.create("Refuel Confirmation", "Refueling will cost you {price} $. Are you sure?", "Yes", "No")
-local radioMenu = Dialog.create("Vehicle Radio", nil, "Set Station", "Cancel")
-Dialog.addSelect(radioMenu, 1, "Station", 1, "None", "KIIS FM", "KOST FM")
-Dialog.addSelect(radioMenu, 1, "Volume", 1, "100%", "75%", "50%", "25%", "10%")
+local vehicleMenu
+local refuelMenu
+local refuelConfirmMenu
+local radioMenu
+
+AddEvent("OnTranslationReady", function()
+    vehicleMenu = Dialog.create(_("vehicle_menu"), nil, "{lock}", "{engine}", "{refuel}", "{radio}", _("vehicle_park"), _("vehicle_unflip"), _("cancel"))
+    refuelMenu = Dialog.create(_("refuel"), nil, _("refuel"), _("cancel"))
+    Dialog.addTextInput(refuelMenu, 1, "Liter")
+    refuelConfirmMenu = Dialog.create(_("refuel_confirmation"), _("refuel_confirmation_text", _("currency_symbol")), _("yes"), _("no"))
+    radioMenu = Dialog.create(_("vehicle_radio"), nil, _("radio_set_station"), _("cancel"))
+    Dialog.addSelect(radioMenu, 1, _("radio_station"), 1, _("radio_station_none"), "KIIS FM", "KOST FM")
+    Dialog.addSelect(radioMenu, 1, _("radio_volume"), 1, "100%", "75%", "50%", "25%", "10%")
+end)
 
 local radioSound = -1
 local radioStation = 0
@@ -36,18 +44,18 @@ end
 local function OpenMenu(vehicle)
     lastVehicle = vehicle
     if GetVehiclePropertyValue(vehicle, "locked") then
-        Dialog.setVariable(vehicleMenu, "lock", "Unlock")
+        Dialog.setVariable(vehicleMenu, "lock", _("unlock"))
     else
-        Dialog.setVariable(vehicleMenu, "lock", "Lock")
+        Dialog.setVariable(vehicleMenu, "lock", _("lock"))
     end
     if IsPlayerInVehicle() then
         if GetVehicleEngineState(vehicle) then
-            Dialog.setVariable(vehicleMenu, "engine", "Turn engine off")
+            Dialog.setVariable(vehicleMenu, "engine", _("turn_off_engine"))
         else
-            Dialog.setVariable(vehicleMenu, "engine", "Turn engine on")
+            Dialog.setVariable(vehicleMenu, "engine", _("turn_on_engine"))
         end
         if GetVehiclePropertyValue(vehicle, "radio") == true then
-            Dialog.setVariable(vehicleMenu, "radio", "Radio")
+            Dialog.setVariable(vehicleMenu, "radio", _("radio"))
         else
             Dialog.setVariable(vehicleMenu, "radio", "")
         end
@@ -59,7 +67,7 @@ local function OpenMenu(vehicle)
     local foundGasStation = false
     for i=1,#gasStations do
         if GetDistance3D(x, y, z, gasStations[i][1], gasStations[i][2], gasStations[i][3]) < gasStations[i][4] then
-            Dialog.setVariable(vehicleMenu, "refuel", "Refuel")
+            Dialog.setVariable(vehicleMenu, "refuel", _("refuel"))
             foundGasStation = true
             break
         end
@@ -134,7 +142,7 @@ AddEvent("OnDialogSubmit", function(dialog, button, ...)
                 if number <= 100 - GetVehiclePropertyValue(lastVehicle, "fuel")  then
                     local price = calcPrice(number)
                     if price > GetPlayerPropertyValue(GetPlayerId(), "cash") then
-                        AddPlayerChat("You can't afford that!")
+                        AddPlayerChat(_("not_enough_cash"))
                     else
                         lastLiters = number
                         Dialog.setVariable(refuelConfirmMenu, "price", price)
@@ -144,7 +152,7 @@ AddEvent("OnDialogSubmit", function(dialog, button, ...)
                     AddPlayerChat("Your tank is too full!")
                 end
             else
-                AddPlayerChat("Invalid amount!")
+                AddPlayerChat(_("invalid_amount"))
             end
         end
         return

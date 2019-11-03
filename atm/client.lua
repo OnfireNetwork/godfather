@@ -1,4 +1,5 @@
 Dialog = Dialog or ImportPackage("dialogui")
+_ = _ or function(k,...) return ImportPackage("i18n").t(GetPackageName(),k,...) end
 
 local atms = {
     {129146, 77939, 1576},
