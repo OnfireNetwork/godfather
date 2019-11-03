@@ -75,5 +75,6 @@
     "inventory": "Inventory",
     "payday_phone_bill": "Mobile Phone Bill",
     "inventory_gave_to_player": "You gave {3} {2} to {1}!",
-    "inventory_got_by_player": "{1} gave you {3} {2}!"
+    "inventory_got_by_player": "{1} gave you {3} {2}!",
+    "inventory_other_cannot_carry": "The other player cannot carry that much!"
 }
