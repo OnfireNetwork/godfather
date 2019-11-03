@@ -6,13 +6,19 @@ local atms = {
     {-181957.5625, -40253.48046875, 1163.1500244141}
 }
 
-local startMenu = Dialog.create("ATM", "Choose an action", "Deposit", "Withdraw", "Exit")
-local depositMenu = Dialog.create("Deposit", "Balance: {balance} $", "Deposit", "Cancel")
-Dialog.addTextInput(depositMenu, 1, "Amount")
-Dialog.setVariable(depositMenu, "balance", 0)
-local withdrawMenu = Dialog.create("Withdraw", "Balance: {balance} $", "Withdraw", "Cancel")
-Dialog.addTextInput(withdrawMenu, 1, "Amount")
-Dialog.setVariable(withdrawMenu, "balance", 0)
+local startMenu
+local depositMenu
+local withdrawMenu
+
+AddEvent("OnTranslationReady", function()
+    startMenu = Dialog.create(_("atm"), nil, _("deposit"), _("withdraw"), _("cancel"))
+    depositMenu = Dialog.create(_("deposit"), _("balance")..": {balance} $", _("deposit"), _("cancel"))
+    Dialog.addTextInput(depositMenu, 1, _("amount"))
+    Dialog.setVariable(depositMenu, "balance", 0)
+    withdrawMenu = Dialog.create(_("withdraw"), _("balance")..": {balance} $", _("withdraw"), _("cancel"))
+    Dialog.addTextInput(withdrawMenu, 1, _("amount"))
+    Dialog.setVariable(withdrawMenu, "balance", 0)
+end)
 
 local function parseAmount(source)
     return tonumber(source)
@@ -49,7 +55,7 @@ AddEvent("OnDialogSubmit", function(dialog, button, amount)
         if button == 1 then
             local a = parseAmount(amount)
             if a == nil then
-                AddPlayerChat("You entered an invalid amount!")
+                AddPlayerChat(_("invalid_amount"))
                 return
             end
             CallRemoteEvent("ATMDeposit", a)
@@ -62,7 +68,7 @@ AddEvent("OnDialogSubmit", function(dialog, button, amount)
         if button == 1 then
             local a = parseAmount(amount)
             if a == nil then
-                AddPlayerChat("You entered an invalid amount!")
+                AddPlayerChat(_("invalid_amount"))
                 return
             end
             CallRemoteEvent("ATMWithdraw", a)

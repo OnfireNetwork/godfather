@@ -22,23 +22,23 @@ AddRemoteEvent("VehicleMenuAction", function(player, action, vehicle)
         local owner = GetVehiclePropertyValue(vehicle, "owner")
         if owner == -1 then
             if not isAdmin(player) then
-                AddPlayerChat(player, "This vehicle doesn't belong to you!")
+                AddPlayerChat(player, _("vehicle_doesnt_belong_to"))
                 return
             end
         elseif owner == 0 then
-            AddPlayerChat(player, "This vehicle has no lock!")
+            AddPlayerChat(player, _("vehicle_no_lock"))
             return
         else
             if owner ~= player then
-                AddPlayerChat(player, "This vehicle doesn't belong to you!")
+                AddPlayerChat(player, _("vehicle_doesnt_belong_to"))
                 return
             end
         end
         SetVehiclePropertyValue(vehicle, "locked", not GetVehiclePropertyValue(vehicle, "locked"), true)
         if GetVehiclePropertyValue(vehicle, "locked") then
-            AddPlayerChat(player, "The vehicle has been locked!")
+            AddPlayerChat(player, _("vehicle_locked"))
         else
-            AddPlayerChat(player, "The vehicle has been unlocked!")
+            AddPlayerChat(player, _("vehicle_unlocked"))
         end
     end
     if action == "Engine" then
@@ -52,11 +52,11 @@ AddRemoteEvent("VehicleMenuAction", function(player, action, vehicle)
     if action == "Park" then
         local owner = GetVehiclePropertyValue(vehicle, "owner")
         if owner < 1 then
-            AddPlayerChat(player, "This vehicle can't be parked!")
+            AddPlayerChat(player, _("vehicle_unable_park"))
             return
         else
             if owner ~= player then
-                AddPlayerChat(player, "This vehicle doesn't belong to you!")
+                AddPlayerChat(player, _("vehicle_doesnt_belong_to"))
                 return
             end
         end
@@ -68,19 +68,19 @@ AddRemoteEvent("VehicleMenuAction", function(player, action, vehicle)
                 player_data[owner].vehicles[i].z = z
                 player_data[owner].vehicles[i].heading = GetVehicleHeading(vehicle)
                 mariadb_query(db, "UPDATE player_vehicles SET x='"..x.."',y='"..y.."',z='"..z.."',heading='"..player_data[owner].vehicles[i].heading.."' WHERE id='"..player_data[owner].vehicles[i].id.."';")
-                AddPlayerChat(player, "The vehicle has been parked!")
+                AddPlayerChat(player, _("vehicle_parked"))
             end
         end
         return
     end
     if action == "Unflip" then
         if GetVehiclePropertyValue(vehicle, "locked") then
-            AddPlayerChat(player, "You have to unlock the vehicle first!")
+            AddPlayerChat(player, _("vehicle_unlock_first"))
             return
         end
         local rx, ry, rz = GetVehicleRotation(vehicle)
 		SetVehicleRotation(vehicle, 0.0, ry, 0.0)
-        AddPlayerChat(player, "Vehicle has been unflipped!")
+        AddPlayerChat(player, _("vehicle_unflipped"))
         return
     end
 end)
@@ -89,14 +89,13 @@ AddRemoteEvent("VehicleRefuel", function(player, vehicle, liter)
     local oldFuel = GetVehiclePropertyValue(vehicle, "fuel")
     if liter <= 100 - oldFuel then
         SetVehiclePropertyValue(vehicle, "fuel", oldFuel + liter, true)
-        AddPlayerChat(player, "Your vehicle got refueled!")
+        AddPlayerChat(player, _("vehicle_refueled"))
     else
         AddPlayerChat("Your tank is too full! (server)")
     end
 end)
 
 AddRemoteEvent("VehicleRadioStation", function(player, vehicle, station, volume)
-    AddPlayerChat(player, "VehicleRadioStation")
     SetVehiclePropertyValue(vehicle, "radio_station", station, true)
     SetVehiclePropertyValue(vehicle, "radio_volume", volume, true)
     for i=0,GetVehicleNumberOfSeats(vehicle) do
@@ -108,9 +107,9 @@ AddRemoteEvent("VehicleRadioStation", function(player, vehicle, station, volume)
         end
     end
     if station == 0 then
-        AddPlayerChat(player, "Radio turned off!")
+        AddPlayerChat(player, _("radio_turned_off"))
     else
-        AddPlayerChat(player, "Station changed!")
+        AddPlayerChat(player, _("radio_station_changed"))
     end
 end)
 

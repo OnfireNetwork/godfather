@@ -18,7 +18,7 @@ local refuelConfirmMenu
 local radioMenu
 
 AddEvent("OnTranslationReady", function()
-    vehicleMenu = Dialog.create(_("vehicle_menu"), nil, "{lock}", "{engine}", "{refuel}", "{radio}", _("vehicle_park"), _("vehicle_unflip"), _("cancel"))
+    vehicleMenu = Dialog.create(_("vehicle_menu"), nil, "{lock}", "{engine}", "{refuel}", "{radio}", _("park"), _("unflip"), _("cancel"))
     refuelMenu = Dialog.create(_("refuel"), nil, _("refuel"), _("cancel"))
     Dialog.addTextInput(refuelMenu, 1, "Liter")
     refuelConfirmMenu = Dialog.create(_("refuel_confirmation"), _("refuel_confirmation_text", _("currency_symbol")), _("yes"), _("no"))
@@ -167,7 +167,7 @@ AddEvent("OnDialogSubmit", function(dialog, button, ...)
         if button == 1 then
             local args = {...}
             local vol = tonumber(args[2]:sub(1,#args[2]-1))/100
-            if args[1] == "None" then
+            if args[1] == _("radio_station_none") then
                 CallRemoteEvent("VehicleRadioStation", lastVehicle, 0, 0)
             else
                 for i=1,#radioStations do

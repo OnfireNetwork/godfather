@@ -21,7 +21,7 @@ end)
 
 AddCommand("g", function(player, ...)
     if not gchat then
-        AddPlayerChat(player, "The global chat is deactivated!")
+        AddPlayerChat(player, _("global_chat_is_disabled"))
         return
     end
     local args = {...}
@@ -42,9 +42,9 @@ AddCommand("toggleg", function(player)
     end
     gchat = not gchat
     if gchat then
-        AddPlayerChatAll("The global chat has been enabled!")
+        AddPlayerChatAll(_("global_chat_enabled"))
     else
-        AddPlayerChatAll("The global chat has been disabled!")
+        AddPlayerChatAll(_("global_chat_disabled"))
     end
 end)
 
