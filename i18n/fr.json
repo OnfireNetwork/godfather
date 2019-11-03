@@ -68,5 +68,6 @@
     "give_weapon": "Donner une arme",
     "give_money": "Donner de l'argent",
     "amount": "Montant",
-    "players": "Joueurs"
+    "players": "Joueurs",
+    "config_save_failed": "Couldn't write config!"
 }
