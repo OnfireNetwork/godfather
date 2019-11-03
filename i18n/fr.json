@@ -64,5 +64,7 @@
     "cash": "Cash",
     "balance": "Balance",
     "type": "Type",
-    "places": "Places"
+    "places": "Places",
+    "give_weapon": "Give Weapon",
+    "give_money": "Give Money"
 }
