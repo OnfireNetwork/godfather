@@ -66,5 +66,7 @@
     "type": "Type",
     "places": "Places",
     "give_weapon": "Give Weapon",
-    "give_money": "Give Money"
+    "give_money": "Give Money",
+    "amount": "Amount",
+    "players": "Players"
 }
