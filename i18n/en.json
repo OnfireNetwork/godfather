@@ -68,5 +68,6 @@
     "give_weapon": "Give Weapon",
     "give_money": "Give Money",
     "amount": "Amount",
-    "players": "Players"
+    "players": "Players",
+    "config_save_failed": "Couldn't write config!"
 }
