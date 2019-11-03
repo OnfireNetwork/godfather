@@ -69,5 +69,9 @@
     "give_money": "Geld geben",
     "amount": "Betrag",
     "players": "Spieler",
-    "config_save_failed": "Konfigurationsdatei konnte nicht geschrieben werden!"
+    "config_save_failed": "Konfigurationsdatei konnte nicht geschrieben werden!",
+    "give": "Geben",
+    "use": "Benutzen",
+    "inventory": "Inventar",
+    "payday_phone_bill": "Handyrechnung"
 }
