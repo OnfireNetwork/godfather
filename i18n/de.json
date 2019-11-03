@@ -66,5 +66,7 @@
     "type": "Typ",
     "places": "Orte",
     "give_weapon": "Waffe geben",
-    "give_money": "Geld geben"
+    "give_money": "Geld geben",
+    "amount": "Betrag",
+    "players": "Spieler"
 }
