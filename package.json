@@ -8,7 +8,8 @@
 		"base/server/spawn.lua",
 		"atm/server.lua",
 		"admin/server.lua",
-		"vehicles/server.lua"
+		"vehicles/server.lua",
+		"chat/server.lua"
 	],
 	"client_scripts": [
 		"atm/client.lua",

@@ -5,14 +5,16 @@ local function isAdmin(player)
 end
 
 AddEvent("OnPlayerChat", function(player, message)
-    message = GetPlayerName(player).." said: "..message
+    message = GetPlayerName(player)..": "..message
     local prefix = GetPlayerPropertyValue(player, "chat_prefix")
-    if prefix ~= nil then
+    if prefix ~= false then
         message = prefix.." "..message
     end
     for id,v in pairs(player_data) do
         if GetPlayerDimension(player) == GetPlayerDimension(id) then
-            if GetDistance3D(GetPlayerLocation(player), GetPlayerLocation(id)) < 4000 then
+            local pX, pY, pZ = GetPlayerLocation(player)
+            local oX, oY, oZ = GetPlayerLocation(id)
+            if GetDistance3D(pX, pY, pZ, oX, oY, oZ) < 4000 then
                 AddPlayerChat(id, message)
             end
         end
@@ -30,7 +32,7 @@ AddCommand("g", function(player, ...)
         if i > 1 then
             message = message.." "
         end
-        message..args[i]
+        message = message..args[i]
     end
     message = "[Global] "..GetPlayerName(player)..": "..message
     AddPlayerChatAll(message)
@@ -56,7 +58,7 @@ AddCommand("support", function(player, ...)
             if i > 1 then
                 message = message.." "
             end
-            message..args[i]
+            message = message..args[i]
         end
         AddPlayerChat(tonumber(args[1]), "[Support] Admin "..GetPlayerName(player).." (#"..player_data[player].id.."): "..message)
     else
@@ -64,7 +66,7 @@ AddCommand("support", function(player, ...)
             if i > 1 then
                 message = message.." "
             end
-            message..args[i]
+            message = message..args[i]
         end
         for k,v in pairs(player_data) do
             if isAdmin(k) then
@@ -84,7 +86,7 @@ AddCommand("broadcast", function(player, ...)
         if i > 1 then
             message = message.." "
         end
-        message..args[i]
+        message = message..args[i]
     end
     AddPlayerChatAll("[Admin Broadcast] "..message)
 end)
