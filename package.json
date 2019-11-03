@@ -4,7 +4,8 @@
 	"server_scripts": [
 		"json.lua",
 		"config.lua",
-		"spawn/server.lua",
+		"base/server/imports.lua",
+		"base/server/spawn.lua",
 		"atm/server.lua",
 		"admin/server.lua",
 		"vehicles/server.lua"
@@ -14,8 +15,7 @@
 		"admin/client.lua",
 		"hud/client.lua",
 		"vehicles/client.lua",
-		"inventory/client.lua",
-		"test.lua"
+		"inventory/client.lua"
 	],
 	"files": [
 		"hud/hud.html",

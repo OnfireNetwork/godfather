@@ -1,0 +1,11 @@
+{
+    "currency_symbol": "$",
+    "payday": "Payday",
+    "payday_new_balance": "New Balance",
+    "payday_old_balance": "Old Balance",
+    "payday_salary": "Salary",
+    "deposit_successful": "Deposit successful!",
+    "withdraw_successful": "Withdraw successful!",
+    "not_enough_balance": "You don't have enough balance!",
+    "not_enough_cash": "You don't have enough cash!"
+}

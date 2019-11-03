@@ -77,13 +77,13 @@ CreateTimer(function()
             player_data[i].payday = 0
             player_data[i].xp = player_data[i].xp + 1
             AddPlayerChat(i, "-----------------------------------------------------------------------------")
-            AddPlayerChat(i, "                                  PayDay")
+            AddPlayerChat(i, "                                  ".._("payday"))
             AddPlayerChat(i, "-----------------------------------------------------------------------------")
-            AddPlayerChat(i, "  Old Balance: "..player_data[i].balance.." $")
+            AddPlayerChat(i, "  ".._("payday_old_balance")..": "..player_data[i].balance.." ".._("currency_symbol"))
             player_data[i].balance = player_data[i].balance + player_data[i].salary
             SetPlayerPropertyValue(i, "balance", player_data[i].balance, true)
-            AddPlayerChat(i, "  Salary: +"..player_data[i].salary.." $")
-            AddPlayerChat(i, "  New Balance: "..player_data[i].balance.." $")
+            AddPlayerChat(i, "  ".._("payday_salary")..": +"..player_data[i].salary.." ".._("currency_symbol"))
+            AddPlayerChat(i, "  ".._("payday_new_balance")..": "..player_data[i].balance.." ".._("currency_symbol"))
             AddPlayerChat(i, "-----------------------------------------------------------------------------")
             player_data[i].salary = 0
         end

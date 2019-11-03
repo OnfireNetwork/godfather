@@ -1,0 +1,10 @@
+{
+    "currency_symbol": "€",
+    "payday": "Zahltag",
+    "payday_new_balance": "Neuer Kontostand",
+    "payday_old_balance": "Alter Kontostand",
+    "payday_salary": "Lohn",
+    "deposit_successful": "Einzahlung erfolgreich",
+    "not_enough_balance": "Dein Kontostand ist zu niedrig!",
+    "not_enough_cash": "Du hast nicht genügend Bargeld!"
+}
