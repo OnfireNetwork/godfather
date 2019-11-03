@@ -9,14 +9,16 @@
 		"atm/server.lua",
 		"admin/server.lua",
 		"vehicles/server.lua",
-		"chat/server.lua"
+		"chat/server.lua",
+		"environment/server.lua"
 	],
 	"client_scripts": [
 		"atm/client.lua",
 		"admin/client.lua",
 		"hud/client.lua",
 		"vehicles/client.lua",
-		"inventory/client.lua"
+		"inventory/client.lua",
+		"environment/client.lua"
 	],
 	"files": [
 		"hud/hud.html",
