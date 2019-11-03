@@ -64,5 +64,7 @@
     "cash": "Bargeld",
     "balance": "Kontostand",
     "type": "Typ",
-    "places": "Orte"
+    "places": "Orte",
+    "give_weapon": "Waffe geben",
+    "give_money": "Geld geben"
 }
