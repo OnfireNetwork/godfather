@@ -69,5 +69,9 @@
     "give_money": "Donner de l'argent",
     "amount": "Montant",
     "players": "Joueurs",
-    "config_save_failed": "Couldn't write config!"
+    "config_save_failed": "Couldn't write config!",
+    "give": "Give",
+    "use": "Use",
+    "inventory": "Inventory",
+    "payday_phone_bill": "Mobile Phone Bill"
 }
