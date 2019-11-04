@@ -1,31 +1,36 @@
 local itemTypes = {
-    ["firework"] = { name = "Firework", max = 10, give = true },
-    ["phone_book"] = { name = "Phone Book", max = 10, give = true },
-    ["traffic_exam"] = { name = "Traffic Exam", max = 1, give = false },
-    ["air_traffic_exam"] = { name = "Air Traffic Exam", max = 1, give = false },
-    ["wp_deagle"] = { name = "Desert Eagle", max = 10, give = true },
-    ["wp_m1911"] = { name = "M1911", max = 10, give = true },
-    ["wp_glock17"] = { name = "Glock 17", max = 10, give = true },
-    ["wp_beretta"] = { name = "Beretta", max = 10, give = true },
-    ["wp_m4"] = { name = "M4 Shotgun", max = 10, give = true },
-    ["wp_pumpgun"] = { name = "Pumpgun", max = 10, give = true },
-    ["wp_mp5sd"] = { name = "MP5 SD", max = 10, give = true },
-    ["wp_mac10"] = { name = "MAC 10", max = 10, give = true },
-    ["wp_ump45"] = { name = "UMP 45", max = 10, give = true },
-    ["wp_m16"] = { name = "M16", max = 10, give = true },
-    ["wp_ak47"] = { name = "AK47", max = 10, give = true },
-    ["wp_ak47_gold"] = { name = "Golden AK47", max = 10, give = true },
-    ["wp_g36"] = { name = "G36", max = 10, give = true },
-    ["wp_val"] = { name = "VAL", max = 10, give = true },
-    ["wp_aks"] = { name = "AKS", max = 10, give = true },
-    ["wp_fal"] = { name = "FAL", max = 10, give = true },
-    ["wp_mk16"] = { name = "MK16", max = 10, give = true },
-    ["wp_hk416"] = { name = "HK 416", max = 10, give = true },
-    ["wp_awp"] = { name = "AWP", max = 10, give = true },
-    ["mag_rifle"] = { name = "Rifle Magazine", max = 100, give = true },
-    ["mag_pistol"] = { name = "Pistol Magazine", max = 100, give = true },
-    ["mobile_phone"] = { name = "Mobile Phone", max = 10, give = true }
+    ["firework"] = {},
+    ["phone_book"] = {},
+    ["traffic_exam"] = { max = 1, give = false },
+    ["air_traffic_exam"] = { max = 1, give = false },
+    ["wp_deagle"] = { max = 10 },
+    ["wp_m1911"] = { max = 10 },
+    ["wp_glock17"] = { max = 10 },
+    ["wp_beretta"] = { max = 10 },
+    ["wp_m4"] = { max = 10 },
+    ["wp_pumpgun"] = { max = 10 },
+    ["wp_mp5sd"] = { max = 10 },
+    ["wp_mac10"] = { max = 10 },
+    ["wp_ump45"] = { max = 10 },
+    ["wp_m16"] = { max = 10 },
+    ["wp_ak47"] = { max = 10 },
+    ["wp_ak47_gold"] = { max = 10 },
+    ["wp_g36"] = { max = 10 },
+    ["wp_val"] = { max = 10 },
+    ["wp_aks"] = { max = 10 },
+    ["wp_fal"] = { max = 10 },
+    ["wp_mk16"] = { max = 10 },
+    ["wp_hk416"] = { max = 10 },
+    ["wp_awp"] = { max = 10 },
+    ["mag_rifle"] = {},
+    ["mag_pistol"] = {},
+    ["mobile_phone"] = {}
 }
+
+for k,v in pairs(itemTypes) do
+    itemTypes[k].max = itemTypes[k].max or 1000
+    itemTypes[k].give = itemTypes[k].give or true
+end
 
 local weaponItems = {
     "wp_none",
@@ -48,29 +53,6 @@ local weaponItems = {
     "wp_mk16",
     "wp_hk416",
     "wp_awp"
-}
-
-local weaponMagSize = {
-    0,
-    8,
-    10,
-    14,
-    9,
-    12,
-    10,
-    40,
-    50,
-    35,
-    31,
-    31,
-    31,
-    31,
-    20,
-    36,
-    20,
-    30,
-    20,
-    7
 }
 
 local function getWPItemModel(item)
@@ -102,9 +84,9 @@ local function weaponPack(player, slot)
     local model, ammo = GetPlayerWeapon(player, slot)
     if model ~= 0 then
         local mags = 0
-        while ammo >= weaponMagSize[model + 1] do
+        while ammo >= weapon_config[model + 1].MagazineSize do
             mags = mags + 1
-            ammo = ammo - weaponMagSize[model + 1]
+            ammo = ammo - weapon_config[model + 1].MagazineSize
         end
         if mags > 0 then
             addInvItem(player, magItem, mags)
@@ -131,6 +113,12 @@ AddCommand("packweapon", function(player)
     SetPlayerWeapon(player, 1, 0, false, GetPlayerEquippedWeaponSlot(player) + 1)
 end)
 
+AddEvent("OnPlayerJoin", function(player)
+    for i=2,#weaponItems do
+        SetPlayerWeaponStat(player, i, "name", _("item_"..weaponItems[i]))
+    end
+end)
+
 AddRemoteEvent("InventoryUseItem", function(player, item)
     if player_data[player].inventory[item] == nil then
         return
@@ -152,14 +140,14 @@ AddRemoteEvent("InventoryUseItem", function(player, item)
     if item == "mag_rifle" then
         local model, ammo = GetPlayerWeapon(player, 2)
         if model ~= 0 then
-            SetPlayerWeapon(player, model + 1, ammo + weaponMagSize[model + 1], true, 2)
+            SetPlayerWeapon(player, model + 1, ammo + weapon_config[model + 1].MagazineSize, true, 2)
             used = true
         end
     end
     if item == "mag_pistol" then
         local model, ammo = GetPlayerWeapon(player, 3)
         if model ~= 0 then
-            SetPlayerWeapon(player, model + 1, ammo + weaponMagSize[model + 1], true, 3)
+            SetPlayerWeapon(player, model + 1, ammo + weapon_config[model + 1].MagazineSize, true, 3)
             used = true
         end
     end
@@ -208,6 +196,6 @@ AddRemoteEvent("InventoryGiveItem", function(player, target, item, amount)
     player_data[target].inventory[item] = old + amount
     SetPlayerPropertyValue(player, "inventory", player_data[player].inventory, true)
     SetPlayerPropertyValue(target, "inventory", player_data[target].inventory, true)
-    AddPlayerChat(player, _("inventory_gave_to_player", GetPlayerName(target), itemTypes[item].name, amount))
-    AddPlayerChat(target, _("inventory_got_by_player", GetPlayerName(target), itemTypes[item].name, amount))
+    AddPlayerChat(player, _("inventory_gave_to_player", GetPlayerName(target), _("item_"..item), amount))
+    AddPlayerChat(target, _("inventory_got_by_player", GetPlayerName(target), _("item_"..item), amount))
 end)

@@ -1,34 +1,5 @@
 Dialog = Dialog or ImportPackage("dialogui")
 
-local itemNames = {
-    firework = "Firework",
-    phone_book = "Phone Book",
-    traffic_exam = "Traffic Exam",
-    air_traffic_exam = "Air Traffic Exam",
-    wp_deagle = "Desert Eagle",
-    wp_m1911 = "M1911",
-    wp_glock17 = "Glock 17",
-    wp_beretta = "Beretta",
-    wp_m4 = "M4 Shotgun",
-    wp_pumpgun = "Pumpgun",
-    wp_mp5sd = "MP5 SD",
-    wp_mac10 = "MAC 10",
-    wp_ump45 = "UMP 45",
-    wp_m16 = "M16",
-    wp_ak47 = "AK47",
-    wp_ak47_gold = "Golden AK47",
-    wp_g36 = "G36",
-    wp_val = "VAL",
-    wp_aks = "AKS",
-    wp_fal = "FAL",
-    wp_mk16 = "MK16",
-    wp_hk416 = "HK 416",
-    wp_awp = "AWP",
-    mag_rifle = "Rifle Magazine",
-    mag_pistol = "Pistol Magazine",
-    mobile_phone = "Mobile Phone"
-}
-
 local inventoryMenu
 local giveMenu
 
@@ -87,7 +58,7 @@ AddEvent("OnKeyPress", function(key)
     end
     local items = {}
     for k,v in pairs(GetPlayerPropertyValue(GetPlayerId(), "inventory")) do
-        items[k] = itemNames[k].." ["..v.."]"
+        items[k] = _("item_"..k).." ["..v.."]"
     end
     Dialog.setSelectLabeledOptions(inventoryMenu, 1, 1, items)
     Dialog.show(inventoryMenu)

@@ -120,3 +120,18 @@ AddRemoteEvent("AdminSpawnVehicle", function(player, model, plate, radio, nitro)
     SetVehiclePropertyValue(vehicle, "radio_volume", 0, true)
     SetPlayerInVehicle(player, vehicle)
 end)
+
+local spectating = {}
+
+AddRemoteEvent("AdminToggleSpec", function(player)
+    if not isAdmin(player) then
+        return
+    end
+    if spectating[player] == nil then
+        SetPlayerSpectate(player, true)
+        spectating[player] = 0
+    else
+        SetPlayerSpectate(player, false)
+        spectating[player] = nil
+    end
+end)

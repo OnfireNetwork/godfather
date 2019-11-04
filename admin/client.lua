@@ -11,8 +11,10 @@ local moneyMenu
 local vehicleMenu
 local weaponMenu
 
+local teleportPlaces
+
 AddEvent("OnTranslationReady", function()
-    local teleportPlaces = {
+    teleportPlaces = {
         {
             name = "Gas Station",
             x = 125773,
@@ -99,7 +101,7 @@ AddEvent("OnTranslationReady", function()
         "AWP (20)"
     }
     
-    adminMenu = Dialog.create("Admin", nil, _("teleport"), _("give_money"), _("give_weapon"), _("spawn_vehicle"), _("copy_position"), _("cancel"))
+    adminMenu = Dialog.create("Admin", nil, _("teleport"), _("give_money"), _("give_weapon"), _("spawn_vehicle"), _("copy_position"), "Toggle Spec",_("cancel"))
     teleportMenu = Dialog.create(_("teleport"), nil, "To Place", "To Coords", "To Player", "Teleport Player", "Teleport All", _("cancel"))
     teleportPlaceMenu = Dialog.create(_("places"), "Select a place to teleport to", table.unpack(teleportPlaceNames))
     teleportCoordsMenu = Dialog.create("Coords", "Enter coords to teleport to", _("teleport"), _("cancel"))
@@ -188,6 +190,10 @@ AddEvent("OnDialogSubmit", function(dialog, button, ...)
         if button == 5 then
             local x, y, z = GetPlayerLocation()
             CopyToClipboard(x..", "..y..", "..z)
+            return
+        end
+        if button == 6 then
+            CallRemoteEvent("AdminToggleSpec")
             return
         end
     end

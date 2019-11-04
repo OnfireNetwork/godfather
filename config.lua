@@ -1,5 +1,18 @@
 _ = _ or function(k,...) return ImportPackage("i18n").t(GetPackageName(),k,...) end
 
+local function readFile(name)
+    local fh = io.open(name, "r")
+    if fh == nil then
+        return nil
+    end
+    fh:close()
+    local content = ""
+    for line in io.lines(name) do
+        content = content..line
+    end
+    return content
+end
+
 local function file_exists(name)
     local f=io.open(name,"r")
     if f~=nil then io.close(f) return true else return false end
@@ -31,3 +44,5 @@ else
     end
     config = json_decode(configJson)
 end
+
+weapon_config = json_decode(readFile("weapons.json")).weapons

@@ -4,6 +4,7 @@
 	"server_scripts": [
 		"json.lua",
 		"config.lua",
+		"doors.lua",
 		"base/server/imports.lua",
 		"base/server/spawn.lua",
 		"atm/server.lua",
@@ -11,7 +12,8 @@
 		"vehicles/server.lua",
 		"chat/server.lua",
 		"environment/server.lua",
-		"inventory/server.lua"
+		"inventory/server.lua",
+		"housing/server.lua"
 	],
 	"client_scripts": [
 		"atm/client.lua",
