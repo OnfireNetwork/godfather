@@ -20,7 +20,7 @@ local itemTypes = {
     ["wp_aks"] = { name = "AKS", max = 10, give = true },
     ["wp_fal"] = { name = "FAL", max = 10, give = true },
     ["wp_mk16"] = { name = "MK16", max = 10, give = true },
-    ["wp_hk416"] = { name = "HK416", max = 10, give = true },
+    ["wp_hk416"] = { name = "HK 416", max = 10, give = true },
     ["wp_awp"] = { name = "AWP", max = 10, give = true },
     ["mag_rifle"] = { name = "Rifle Magazine", max = 100, give = true },
     ["mag_pistol"] = { name = "Pistol Magazine", max = 100, give = true }
