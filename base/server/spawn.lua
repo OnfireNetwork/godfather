@@ -22,6 +22,8 @@ AddEvent("OnPlayerSteamAuth", function(player)
                 inventory = json_decode(mariadb_get_value_name(1, "inventory")),
                 licenses = json_decode(mariadb_get_value_name(1, "licenses"))
             }
+            SetPlayerWeapon(player, mariadb_get_value_name_int(1, "prim_weapon"), mariadb_get_value_name_int(1, "prim_ammo"), false, 2)
+            SetPlayerWeapon(player, mariadb_get_value_name_int(1, "sec_weapon"), mariadb_get_value_name_int(1, "sec_ammo"), false, 3)
             SetPlayerPropertyValue(player, "cash", player_data[player].cash, true)
             SetPlayerPropertyValue(player, "balance", player_data[player].balance, true)
             SetPlayerPropertyValue(player, "inventory", player_data[player].inventory, true)
@@ -71,7 +73,11 @@ AddEvent("OnPlayerDataReady", function(player, data)
 end)
 
 function GFSavePlayerData(player)
-    mariadb_query(db, "UPDATE players SET cash='"..player_data[player].cash.."',balance='"..player_data[player].balance.."',xp='"..player_data[player].xp.."',payday='"..player_data[player].payday.."',salary='"..player_data[player].salary.."',phone_bill='"..player_data[player].phone_bill.."',inventory='"..json_encode(player_data[player].inventory).."',licenses='"..json_encode(player_data[player].licenses).."' WHERE id='"..player_data[player].db.."';")
+    local primModel, primAmmo = GetPlayerWeapon(player)
+    local secModel, secAmmo = GetPlayerWeapon(player)
+    primModel = primModel + 1
+    secModel = secModel + 1
+    mariadb_query(db, "UPDATE players SET cash='"..player_data[player].cash.."',balance='"..player_data[player].balance.."',xp='"..player_data[player].xp.."',payday='"..player_data[player].payday.."',salary='"..player_data[player].salary.."',phone_bill='"..player_data[player].phone_bill.."',inventory='"..json_encode(player_data[player].inventory).."',licenses='"..json_encode(player_data[player].licenses).."',prim_weapon='"..primModel.."',prim_ammo='"..primAmmo.."',sec_weapon='"..secModel.."',sec_ammo='"..secAmmo.."' WHERE id='"..player_data[player].db.."';")
 end
 
 AddEvent("OnPlayerQuit", function(player)
