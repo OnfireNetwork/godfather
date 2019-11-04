@@ -1,6 +1,6 @@
 local itemTypes = {
     ["firework"] = { name = "Firework", max = 10, give = true },
-    ["phone_book"] = { name = "Phone Book", max = 1, give = true },
+    ["phone_book"] = { name = "Phone Book", max = 10, give = true },
     ["traffic_exam"] = { name = "Traffic Exam", max = 1, give = false },
     ["air_traffic_exam"] = { name = "Air Traffic Exam", max = 1, give = false },
     ["wp_deagle"] = { name = "Desert Eagle", max = 10, give = true },
@@ -23,7 +23,8 @@ local itemTypes = {
     ["wp_hk416"] = { name = "HK 416", max = 10, give = true },
     ["wp_awp"] = { name = "AWP", max = 10, give = true },
     ["mag_rifle"] = { name = "Rifle Magazine", max = 100, give = true },
-    ["mag_pistol"] = { name = "Pistol Magazine", max = 100, give = true }
+    ["mag_pistol"] = { name = "Pistol Magazine", max = 100, give = true },
+    ["mobile_phone"] = { name = "Mobile Phone", max = 10, give = true }
 }
 
 local weaponItems = {

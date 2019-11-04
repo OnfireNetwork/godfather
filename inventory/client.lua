@@ -25,7 +25,8 @@ local itemNames = {
     wp_hk416 = "HK 416",
     wp_awp = "AWP",
     mag_rifle = "Rifle Magazine",
-    mag_pistol = "Pistol Magazine"
+    mag_pistol = "Pistol Magazine",
+    mobile_phone = "Mobile Phone"
 }
 
 local inventoryMenu

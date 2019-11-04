@@ -91,3 +91,29 @@ AddCommand("broadcast", function(player, ...)
     AddPlayerChatAll("[Admin Broadcast] "..message)
 end)
 
+AddCommand("sms", function(player, ...)
+    if player_data[player] == nil then
+        return
+    end
+    if player_data[player].inventory.mobile_phone == nil then
+        AddPlayerChat(player, "You need a mobile phone to send sms!")
+        return
+    end
+    local args = {...}
+    if #args < 2 then
+        AddPlayerChat("/sms <phonenumber> <message>")
+        return
+    end
+    local phonenumber = args[1]
+    -- TODO
+    local message = ""
+    for i=2,#args do
+        if i > 2 then
+            message = message.." "
+        end
+        message = message..args[i]
+    end
+    -- TODO
+    player_data[player].phone_bill = player_data[player].phone_bill + 30
+end)
+
