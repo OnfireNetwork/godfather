@@ -84,14 +84,14 @@ local function weaponPack(player, slot)
     local model, ammo = GetPlayerWeapon(player, slot)
     if model ~= 0 then
         local mags = 0
-        while ammo >= weapon_config[model + 1].MagazineSize do
+        while ammo >= weapon_config[model].MagazineSize do
             mags = mags + 1
-            ammo = ammo - weapon_config[model + 1].MagazineSize
+            ammo = ammo - weapon_config[model].MagazineSize
         end
         if mags > 0 then
             addInvItem(player, magItem, mags)
         end
-        addInvItem(player, weaponItems[model + 1], 1)
+        addInvItem(player, weaponItems[model], 1)
     end
 end
 
@@ -109,8 +109,8 @@ local function useWeaponItem(player, item)
 end
 
 AddCommand("packweapon", function(player)
-    weaponPack(player, GetPlayerEquippedWeaponSlot(player) + 1)
-    SetPlayerWeapon(player, 1, 0, false, GetPlayerEquippedWeaponSlot(player) + 1)
+    weaponPack(player, GetPlayerEquippedWeaponSlot(player))
+    SetPlayerWeapon(player, 1, 0, false, GetPlayerEquippedWeaponSlot(player))
 end)
 
 AddEvent("OnPlayerJoin", function(player)
@@ -140,14 +140,14 @@ AddRemoteEvent("InventoryUseItem", function(player, item)
     if item == "mag_rifle" then
         local model, ammo = GetPlayerWeapon(player, 2)
         if model ~= 0 then
-            SetPlayerWeapon(player, model + 1, ammo + weapon_config[model + 1].MagazineSize, true, 2)
+            SetPlayerWeapon(player, model, ammo + weapon_config[model].MagazineSize, true, 2)
             used = true
         end
     end
     if item == "mag_pistol" then
         local model, ammo = GetPlayerWeapon(player, 3)
         if model ~= 0 then
-            SetPlayerWeapon(player, model + 1, ammo + weapon_config[model + 1].MagazineSize, true, 3)
+            SetPlayerWeapon(player, model, ammo + weapon_config[model].MagazineSize, true, 3)
             used = true
         end
     end

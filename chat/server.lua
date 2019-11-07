@@ -7,7 +7,7 @@ end
 AddEvent("OnPlayerChat", function(player, message)
     message = GetPlayerName(player)..": "..message
     local prefix = GetPlayerPropertyValue(player, "chat_prefix")
-    if prefix ~= false then
+    if prefix ~= nil then
         message = prefix.." "..message
     end
     for id,v in pairs(player_data) do
