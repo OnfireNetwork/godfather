@@ -1,12 +1,13 @@
+local data = config["time"]
+
 AddEvent("OnPlayerJoin", function(player)
-    local data = config["time"]
-    if data["time"]["mode"] == "real" then
-        data["time"]["server_time"] = GetTimeSeconds()
+    if data["mode"] == "real" then
+        data["server_time"] = GetTimeSeconds()
     end
     CallRemoteEvent(player, "TimeUpdate", data)
 end)
 
-if data["time"]["mode"] == "real" then
+if data["mode"] == "real" then
     CreateTimer(function()
         local data = config["time"]
         data["time"]["server_time"] = GetTimeSeconds()
