@@ -102,5 +102,8 @@
     "item_wp_awp": "AWP",
     "item_mag_pistol": "Pistolenmagazin",
     "item_mag_rifle": "Gewehrmagazin",
-    "item_mobile_phone": "Handy"
+    "item_mobile_phone": "Handy",
+    "sms_phone_required": "Du benötigst ein Handy um SMS zu versenden!",
+    "no_players_close": "Es befinden sich keine Spieler in deiner Nähe",
+    "shop_gunstore": "Waffenladen"
 }
