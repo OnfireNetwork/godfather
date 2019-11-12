@@ -49,7 +49,7 @@ AddEvent("OnKeyPress", function(key)
         return
     end
     local x, y, z = GetPlayerLocation()
-    for i=1,#atms do
+    for i=1,#cardealers do
         if GetDistance3D(x, y, z, cardealers[i][1], cardealers[i][2], cardealers[i][3]) < 100 then
             Dialog.show(menu)
             return
