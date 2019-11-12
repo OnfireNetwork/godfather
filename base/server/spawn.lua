@@ -55,6 +55,36 @@ AddEvent("OnPlayerSteamAuth", function(player)
     end)
 end)
 
+function SetPlayerCash(player, cash)
+    if player_data[player] == nil then
+        return
+    end
+    player_data[player].cash = cash
+    SetPlayerPropertyValue(player, "cash", player_data[player].cash, true)
+end
+
+function GetPlayerCash(player)
+    if player_data[player] == nil then
+        return 0
+    end
+    return player_data[player].cash
+end
+
+function SetPlayerBalance(player, balance)
+    if player_data[player] == nil then
+        return
+    end
+    player_data[player].balance = balance
+    SetPlayerPropertyValue(player, "balance", player_data[player].balance, true)
+end
+
+function GetPlayerBalance(player)
+    if player_data[player] == nil then
+        return 0
+    end
+    return player_data[player].balance
+end
+
 local function updatePlayerList()
     local playerList = {}
     for k,v in pairs(player_data) do

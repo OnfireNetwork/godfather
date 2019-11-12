@@ -2,11 +2,12 @@ local function isAdmin(player)
     return true
 end
 
-local function calcPrice(liter)
-    return liter * 1.67
-end
+local fuelUsage = 100 / 3600
+local fuelPrice = 5
 
-local fuelUsage = 30 / 3600
+local function calcPrice(liter)
+    return liter * fuelPrice
+end
 
 CreateTimer(function()
     local vehicles = GetAllVehicles()

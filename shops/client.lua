@@ -29,6 +29,8 @@ AddEvent("OnTranslationReady", function()
     Dialog.setButtons(shopMenu, 2, "Buy")
 end)
 
+local lastStore
+
 AddEvent("OnKeyPress", function(key)
     if key ~= "E" then
         return
@@ -37,7 +39,8 @@ AddEvent("OnKeyPress", function(key)
     for i=1,#shops do
         for j=1,#shops[i].locations do
             if GetDistance3D(x , y, z, shops[i].locations[j][1], shops[i].locations[j][2], shops[i].locations[j][3]) < 150 then
-                Dialog.setVariable(shopMenu, "shop_title", _("shop_gunstore"))
+                lastStore = shops[i].type
+                Dialog.setVariable(shopMenu, "shop_title", _("shop_"..shops[i].type(v)))
                 local items = {}
                 for k,v in pairs(GetPlayerPropertyValue(GetPlayerId(), "inventory")) do
                     items[k] = _("item_"..k).." ["..v.."]"
@@ -51,6 +54,23 @@ AddEvent("OnKeyPress", function(key)
                 Dialog.show(shopMenu)
                 return
             end
+        end
+    end
+end)
+
+AddEvent("OnDialogSubmit", function(dialog, button, leftSelection, rightSelection)
+    if dialog == shopMenu then
+        if button == 1 then
+            if leftSelection == "" then
+                return
+            end
+            CallRemoteEvent("StoreSellItem", lastStore, leftSelection)
+        end
+        if button == 2 then
+            if rightSelection == "" then
+                return
+            end
+            CallRemoteEvent("StoreBuyItem", lastStore, rightSelection)
         end
     end
 end)

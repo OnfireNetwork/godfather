@@ -20,7 +20,7 @@ local radioMenu
 AddEvent("OnTranslationReady", function()
     vehicleMenu = Dialog.create(_("vehicle_menu"), nil, "{lock}", "{engine}", "{refuel}", "{radio}", _("park"), _("unflip"), _("cancel"))
     refuelMenu = Dialog.create(_("refuel"), nil, _("refuel"), _("cancel"))
-    Dialog.addTextInput(refuelMenu, 1, "Liter")
+    Dialog.addTextInput(refuelMenu, 1, _("fuel_unit"))
     refuelConfirmMenu = Dialog.create(_("refuel_confirmation"), _("refuel_confirmation_text", _("currency_symbol")), _("yes"), _("no"))
     radioMenu = Dialog.create(_("vehicle_radio"), nil, _("radio_set_station"), _("cancel"))
     Dialog.addSelect(radioMenu, 1, _("radio_station"), 1, _("radio_station_none"), "KIIS FM", "KOST FM")
