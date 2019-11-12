@@ -86,7 +86,7 @@ AddEvent("OnDialogSubmit", function(dialog, button, ...)
             giveItem = item
             local playerOpts = makePlayerOptions()
             if #playerOpts == 0 then
-                AddPlayerChat("There are no players close to you!")
+                AddPlayerChat(_("no_players_close"))
                 return
             end
             Dialog.setSelectOptions(giveMenu, 1, 1, table.unpack(playerOpts))

@@ -37,7 +37,7 @@ AddEvent("OnKeyPress", function(key)
     for i=1,#shops do
         for j=1,#shops[i].locations do
             if GetDistance3D(x , y, z, shops[i].locations[j][1], shops[i].locations[j][2], shops[i].locations[j][3]) < 150 then
-                Dialog.setVariable(shopMenu, "shop_title", "Gunstore")
+                Dialog.setVariable(shopMenu, "shop_title", _("shop_gunstore"))
                 local items = {}
                 for k,v in pairs(GetPlayerPropertyValue(GetPlayerId(), "inventory")) do
                     items[k] = _("item_"..k).." ["..v.."]"

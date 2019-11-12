@@ -96,7 +96,7 @@ AddCommand("sms", function(player, ...)
         return
     end
     if player_data[player].inventory.mobile_phone == nil then
-        AddPlayerChat(player, "You need a mobile phone to send sms!")
+        AddPlayerChat(player, _("sms_phone_required"))
         return
     end
     local args = {...}

@@ -89,10 +89,8 @@ AddRemoteEvent("VehicleRefuel", function(player, vehicle, liter)
     local oldFuel = GetVehiclePropertyValue(vehicle, "fuel")
     if liter <= 100 - oldFuel then
         SetVehiclePropertyValue(vehicle, "fuel", oldFuel + liter, true)
-        AddPlayerChat(player, _("vehicle_refueled"))
-    else
-        AddPlayerChat("Your tank is too full! (server)")
     end
+    AddPlayerChat(player, _("vehicle_refueled"))
 end)
 
 AddRemoteEvent("VehicleRadioStation", function(player, vehicle, station, volume)

@@ -148,8 +148,6 @@ AddEvent("OnDialogSubmit", function(dialog, button, ...)
                         Dialog.setVariable(refuelConfirmMenu, "price", price)
                         Dialog.show(refuelConfirmMenu)
                     end
-                else
-                    AddPlayerChat("Your tank is too full!")
                 end
             else
                 AddPlayerChat(_("invalid_amount"))
