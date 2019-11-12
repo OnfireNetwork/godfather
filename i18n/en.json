@@ -102,5 +102,8 @@
     "item_wp_awp": "AWP",
     "item_mag_pistol": "Pistol Magazine",
     "item_mag_rifle": "Rifle Magazine",
-    "item_mobile_phone": "Mobile Phone"
+    "item_mobile_phone": "Mobile Phone",
+    "sms_phone_required": "You need a mobile phone to send sms!",
+    "no_players_close": "There are no players close to you!",
+    "shop_gunstore": "Gunstore"
 }
