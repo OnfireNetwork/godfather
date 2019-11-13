@@ -106,5 +106,12 @@
     "sms_phone_required": "You need a mobile phone to send sms!",
     "no_players_close": "There are no players close to you!",
     "shop_gunstore": "Gunstore",
-    "fuel_unit": "Liter\n"
+    "fuel_unit": "Liter\n",
+    "to_place": "To Place",
+    "to_player": "To Player",
+    "teleport_player": "Teleport Player",
+    "teleport_all": "Teleport All",
+    "to_coords": "To Coords",
+    "coords": "Coordinates",
+    "toggle_spectator": "Toggle Spec\n"
 }
