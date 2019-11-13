@@ -106,5 +106,12 @@
     "sms_phone_required": "Du benötigst ein Handy um SMS zu versenden!",
     "no_players_close": "Es befinden sich keine Spieler in deiner Nähe",
     "shop_gunstore": "Waffenladen",
-    "fuel_unit": "Liter"
+    "fuel_unit": "Liter",
+    "to_place": "Zu Ort",
+    "to_player": "Zu Spieler",
+    "teleport_player": "Spieler teleportieren",
+    "teleport_all": "Alle teleportieren",
+    "to_coords": "Zu Koordinaten",
+    "coords": "Koordinaten",
+    "toggle_spectator": "Zuschauer Modus"
 }
