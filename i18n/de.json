@@ -113,5 +113,6 @@
     "teleport_all": "Alle teleportieren",
     "to_coords": "Zu Koordinaten",
     "coords": "Koordinaten",
-    "toggle_spectator": "Zuschauer Modus"
+    "toggle_spectator": "Zuschauer Modus",
+    "item_wp_tazer": "Tazer"
 }
