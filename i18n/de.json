@@ -105,5 +105,6 @@
     "item_mobile_phone": "Handy",
     "sms_phone_required": "Du benötigst ein Handy um SMS zu versenden!",
     "no_players_close": "Es befinden sich keine Spieler in deiner Nähe",
-    "shop_gunstore": "Waffenladen"
+    "shop_gunstore": "Waffenladen",
+    "fuel_unit": "Liter"
 }
