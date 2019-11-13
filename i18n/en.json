@@ -113,5 +113,6 @@
     "teleport_all": "Teleport All",
     "to_coords": "To Coords",
     "coords": "Coordinates",
-    "toggle_spectator": "Toggle Spec\n"
+    "toggle_spectator": "Toggle Spec\n",
+    "item_wp_tazer": "Tazer"
 }
