@@ -22,6 +22,7 @@ local itemTypes = {
     ["wp_mk16"] = { max = 10 },
     ["wp_hk416"] = { max = 10 },
     ["wp_awp"] = { max = 10 },
+    ["wp_tazer"] = { max = 10 },
     ["mag_rifle"] = {},
     ["mag_pistol"] = {},
     ["mobile_phone"] = {}
@@ -52,7 +53,8 @@ local weaponItems = {
     "wp_fal",
     "wp_mk16",
     "wp_hk416",
-    "wp_awp"
+    "wp_awp",
+    "wp_tazer"
 }
 
 local function getWPItemModel(item)
@@ -115,7 +117,7 @@ function GetPlayerInventoryItemAmount(player, item)
 end
 
 function CanPlayerCarryItem(player, item, amount)
-    return player_data[target].inventory[item] + amount <= itemTypes[item].max
+    return player_data[player].inventory[item] + amount <= itemTypes[item].max
 end
 
 local function weaponPack(player, slot)
@@ -127,7 +129,7 @@ local function weaponPack(player, slot)
         magItem = "mag_pistol"
     end
     local model, ammo = GetPlayerWeapon(player, slot)
-    if model ~= 0 then
+    if model ~= 1 then
         local mags = 0
         while ammo >= weapon_config[model].MagazineSize do
             mags = mags + 1
@@ -150,7 +152,7 @@ local function useWeaponItem(player, item)
         slot = 3
     end
     weaponPack(player, slot)
-    SetPlayerWeapon(player, newModel, 0, true, slot)
+    SetPlayerWeapon(player, newModel, 0, true, slot, false)
 end
 
 AddCommand("packweapon", function(player)
@@ -185,14 +187,14 @@ AddRemoteEvent("InventoryUseItem", function(player, item)
     if item == "mag_rifle" then
         local model, ammo = GetPlayerWeapon(player, 2)
         if model ~= 0 then
-            SetPlayerWeapon(player, model, ammo + weapon_config[model].MagazineSize, true, 2)
+            SetPlayerWeapon(player, model, ammo + weapon_config[model].MagazineSize, true, 2, true)
             used = true
         end
     end
     if item == "mag_pistol" then
         local model, ammo = GetPlayerWeapon(player, 3)
         if model ~= 0 then
-            SetPlayerWeapon(player, model, ammo + weapon_config[model].MagazineSize, true, 3)
+            SetPlayerWeapon(player, model, ammo + weapon_config[model].MagazineSize, true, 3, true)
             used = true
         end
     end
