@@ -114,5 +114,6 @@
     "to_coords": "Zu Koordinaten",
     "coords": "Koordinaten",
     "toggle_spectator": "Zuschauer Modus",
-    "item_wp_tazer": "Tazer"
+    "item_wp_tazer": "Tazer",
+    "not_enough_items": "Du hast nicht genügend {1}!"
 }
