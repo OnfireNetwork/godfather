@@ -8,11 +8,25 @@ AddEvent("OnPlayerInteractDoor", function(player, door, bWantsOpen)
 	SetDoorOpen(door, not IsDoorOpen(door))
 end)
 
-AddEvent("OnPackageStart", function()
+AddEvent("OnPackageStart", function()	
+	CreateDoor(25, -181899.000000, -66559.000000, 1051.000000, 0.0, true) -- laundromat back
+	CreateDoor(44, -180632.000000, -66635.000000, 1054.000000, 90.0, true) -- laundromat front
 	
+	CreateDoor(43, -172164.000000, -64116.000000, 1112.000000, -90.0, true)
+	CreateDoor(43, -171798.000000, -64285.000000, 1112.000000, 0.0, true)
+	CreateDoor(43, -171571.000000, -64523.000000, 1112.000000, -90.0, true)
+	CreateDoor(43, -171795.000000, -63149.000000, 1432.000000, 180.0, true)
+	CreateDoor(43, -172174.000000, -63650.000000, 1432.000000, 270.0, true)
+	CreateDoor(43, -172174.000000, -64051.000000, 1432.000000, 270.0, true)
+	CreateDoor(43, -172426.000000, -63654.000000, 1432.000000, 90.0, true)
+	CreateDoor(43, -173426.000000, -63654.000000, 1432.000000, 90.0, true)
+	CreateDoor(43, -173564.000000, -64051.000000, 1432.000000, 270.0, true)
+	CreateDoor(43, -174189.000000, -63887.000000, 1111.000000, 0.0, true)
+	CreateDoor(43, -172987.000000, -63886.000000, 1111.000000, 0.0, true)
+	CreateDoor(43, -173363.000000, -64113.000000, 1111.000000, -90.0, true)
+	CreateDoor(43, -172988.000000, -63485.000000, 1111.000000, 0.0, true)
 	CreateDoor(31, -168700.000000, -38920.000000, 1051.000000, 0.0, true) -- Front sliding door gas station town
 	CreateDoor(3, -169403.000000, -39609.000000, 1051.000000, -90.0, true) -- Back door gas station town
-	
 	CreateDoor(35, -182093.000000, -40643.000000, 1065.000000, 90.0, true) -- Armed&Dangerous front
 	CreateDoor(36, -180794.000000, -40995.000000, 1065.000000, 0.0, true) -- A&D back door
 
