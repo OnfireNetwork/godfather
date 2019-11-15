@@ -233,7 +233,7 @@ AddEvent("OnDialogSubmit", function(dialog, button, ...)
     if dialog == teleportToPlayerMenu then
         if button == 1 then
             local args = {...}
-            local id = parsePlayerOptionId(args[1])
+            local id = parseOptionId(args[1])
             CallRemoteEvent("AdminTeleportPlayer", GetPlayerId(), id)
         end
         return
@@ -241,7 +241,7 @@ AddEvent("OnDialogSubmit", function(dialog, button, ...)
     if dialog == teleportPlayerMenu then
         if button == 1 then
             local args = {...}
-            local id = parsePlayerOptionId(args[1])
+            local id = parseOptionId(args[1])
             CallRemoteEvent("AdminTeleportPlayer", id, GetPlayerId())
         end
         return
