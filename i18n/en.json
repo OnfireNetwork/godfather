@@ -114,5 +114,6 @@
     "to_coords": "To Coords",
     "coords": "Coordinates",
     "toggle_spectator": "Toggle Spec\n",
-    "item_wp_tazer": "Tazer"
+    "item_wp_tazer": "Tazer",
+    "not_enough_items": "You don't have enough {1}!"
 }
