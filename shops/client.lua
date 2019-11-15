@@ -24,8 +24,10 @@ local shopMenu
 AddEvent("OnTranslationReady", function()
     shopMenu = Dialog.create("{shop_title}", nil, _("cancel"))
     Dialog.addSelect(shopMenu, 1, "Your Inventory", 10)
+    Dialog.addTextInput(shopMenu, 1, _("amount"))
     Dialog.setButtons(shopMenu, 1, "Sell")
     Dialog.addSelect(shopMenu, 2, "Shop Inventory", 10)
+    Dialog.addTextInput(shopMenu, 2, _("amount"))
     Dialog.setButtons(shopMenu, 2, "Buy")
 end)
 
@@ -58,19 +60,27 @@ AddEvent("OnKeyPress", function(key)
     end
 end)
 
-AddEvent("OnDialogSubmit", function(dialog, button, leftSelection, rightSelection)
+AddEvent("OnDialogSubmit", function(dialog, button, leftSelection, leftAmount, rightSelection, rightAmount)
     if dialog == shopMenu then
         if button == 1 then
             if leftSelection == "" then
                 return
             end
-            CallRemoteEvent("StoreSellItem", lastStore, leftSelection)
+            local amount = tonumber(leftAmount)
+            if amount == nil then
+                amount = 1
+            end
+            CallRemoteEvent("StoreSellItem", lastStore, leftSelection, amount)
         end
         if button == 2 then
             if rightSelection == "" then
                 return
             end
-            CallRemoteEvent("StoreBuyItem", lastStore, rightSelection)
+            local amount = tonumber(rightAmount)
+            if amount == nil then
+                amount = 1
+            end
+            CallRemoteEvent("StoreBuyItem", lastStore, rightSelection, amount)
         end
     end
 end)

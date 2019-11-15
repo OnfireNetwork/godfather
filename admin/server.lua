@@ -66,18 +66,16 @@ AddRemoteEvent("AdminAddMoney", function(player, target, type, amount)
         end
         targets = {target}
     end
-    if type == "Cash" then
+    if type == _("cash") then
         for i=1,#targets do
-            player_data[targets[i]].cash = player_data[targets[i]].cash + amount
-            SetPlayerPropertyValue(targets[i], "cash", player_data[targets[i]].cash, true)
+            SetPlayerCash(targets[i], GetPlayerCash(targets[i]) + amount)
         end
         AddPlayerChat(player, "Added cash successfully!")
         return
     end
-    if type == "Bank" then
+    if type == _("balance") then
         for i=1,#targets do
-            player_data[targets[i]].balance = player_data[targets[i]].balance + amount
-            SetPlayerPropertyValue(targets[i], "balance", player_data[targets[i]].balance, true)
+            SetPlayerBalance(targets[i], GetPlayerBalance(targets[i]) + amount)
         end
         AddPlayerChat(player, "Added balance successfully!")
         return

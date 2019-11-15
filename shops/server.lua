@@ -10,7 +10,7 @@ local pricing = {
     }
 }
 
-local getPrice(store, item)
+local function getPrice(store, item)
     if pricing[store] == nil then
         return 0
     end
@@ -20,8 +20,8 @@ local getPrice(store, item)
     return pricing[store][item]
 end
 
-AddRemoteEvent("StoreBuyItem", function(player, store, item)
-    local price = getPrice(store, item)
+AddRemoteEvent("StoreBuyItem", function(player, store, item, amount)
+    local price = getPrice(store, item) * amount
     if price == 0 then
         return
     end
@@ -30,17 +30,18 @@ AddRemoteEvent("StoreBuyItem", function(player, store, item)
         return
     end
     SetPlayerCash(player, GetPlayerCash(player) - price)
-    AddPlayerInventoryItem(player, item, 1)
+    AddPlayerInventoryItem(player, item, amount)
 end)
 
-AddRemoteEvent("StoreSellItem", function(player, store, item)
-    local price = getPrice(store, item)
+AddRemoteEvent("StoreSellItem", function(player, store, item, amount)
+    local price = getPrice(store, item) * amount
     if price == 0 then
         return
     end
-    if GetPlayerInventoryItemAmount(player, item) < 1 then
+    if GetPlayerInventoryItemAmount(player, item) < amount then
+        AddPlayerChat(_("not_enough_items", _("item_"..item)))
         return
     end
     SetPlayerCash(player, GetPlayerCash(player) + price)
-    RemovePlayerInventoryItem(player, item, 1)
+    RemovePlayerInventoryItem(player, item, amount)
 end)

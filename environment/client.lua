@@ -13,6 +13,3 @@ AddRemoteEvent("TimeUpdate", function(data)
         return
     end
 end)
-
-SetOceanWaterLevel(1600, false)
-SetOceanColor(RGBA(0,0,0,255), RGBA(0,0,0,255), RGBA(0,0,0,255), RGBA(0,0,0,255), RGBA(0,0,0,255))
