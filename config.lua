@@ -18,11 +18,26 @@ local function file_exists(name)
     if f~=nil then io.close(f) return true else return false end
 end
 
-local dbJson = ""
-for line in io.lines("db.json") do
-    dbJson = dbJson..line
+local dbConfig = {
+    host = "localhost",
+    username = "godfather",
+    password = "changeme",
+    database = "godfather"
+}
+if file_exists("db.json") then
+    local dbJson = ""
+    for line in io.lines("db.json") do
+        dbJson = dbJson..line
+    end
+    dbConfig = json_decode(dbJson)
+else
+    local fh = io.open("db.json","w")
+    fh:write(json_encode(dbConfig))
+    fh:close()
+    print("The database hasn't been configured! Edit db.json and start the server again!")
+    ServerExit()
 end
-local dbConfig = json_decode(dbJson)
+
 db = mariadb_connect(dbConfig.host, dbConfig.username, dbConfig.password, dbConfig.database)
 
 -- Default config values
