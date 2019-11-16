@@ -14,7 +14,8 @@
 		"environment/server.lua",
 		"inventory/server.lua",
 		"housing/server.lua",
-		"shops/server.lua"
+		"shops/server.lua",
+		"vehicleshops/server.lua"
 	],
 	"client_scripts": [
 		"json.lua",
@@ -25,7 +26,8 @@
 		"vehicles/client.lua",
 		"inventory/client.lua",
 		"environment/client.lua",
-		"shops/client.lua"
+		"shops/client.lua",
+		"vehicleshops/client.lua"
 	],
 	"files": [
 		"hud/hud.html",

@@ -83,7 +83,7 @@ AddEvent("OnKeyPress", function(key)
         return
     end
     if IsPlayerInVehicle() then
-        if GetVehicleForwardSpeed(GetPlayerVehicle()) == 0 then
+        if GetVehicleForwardSpeed(GetPlayerVehicle()) < 3 then
             OpenMenu(GetPlayerVehicle())
         end
     else
@@ -92,11 +92,13 @@ AddEvent("OnKeyPress", function(key)
         local vehicle = nil
         local distance = 10000
         for i=1,#vehicles do
-            local dist = GetDistance3D(x, y, z, GetVehicleLocation(vehicles[i]))
-            if dist < 500 then
-                if dist < distance then
-                    vehicle = vehicles[i]
-                    distance = dist
+            if not GetVehiclePropertyValue(vehicles[i], "dummy") then
+                local dist = GetDistance3D(x, y, z, GetVehicleLocation(vehicles[i]))
+                if dist < 500 then
+                    if dist < distance then
+                        vehicle = vehicles[i]
+                        distance = dist
+                    end
                 end
             end
         end

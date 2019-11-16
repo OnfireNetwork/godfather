@@ -116,6 +116,7 @@ AddRemoteEvent("AdminSpawnVehicle", function(player, model, plate, radio, nitro)
     SetVehiclePropertyValue(vehicle, "radio", radio, true)
     SetVehiclePropertyValue(vehicle, "radio_station", 0, true)
     SetVehiclePropertyValue(vehicle, "radio_volume", 0, true)
+    SetVehicleRespawnParams(vehicle, false)
     SetPlayerInVehicle(player, vehicle)
 end)
 

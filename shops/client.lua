@@ -13,7 +13,6 @@ local shops = {
             mag_rifle = 200
         },
         locations = {
-            {128271.734375, 75061.875, 1566.9001464844},
             {-181943.796875, -40694.6953125, 1163.1500244141}
         }
     }
@@ -23,12 +22,12 @@ local shopMenu
 
 AddEvent("OnTranslationReady", function()
     shopMenu = Dialog.create("{shop_title}", nil, _("cancel"))
-    Dialog.addSelect(shopMenu, 1, "Your Inventory", 10)
+    Dialog.addSelect(shopMenu, 1, _("your_inventory"), 10)
     Dialog.addTextInput(shopMenu, 1, _("amount"))
-    Dialog.setButtons(shopMenu, 1, "Sell")
-    Dialog.addSelect(shopMenu, 2, "Shop Inventory", 10)
+    Dialog.setButtons(shopMenu, 1, _("sell"))
+    Dialog.addSelect(shopMenu, 2, _("shop_inventory"), 10)
     Dialog.addTextInput(shopMenu, 2, _("amount"))
-    Dialog.setButtons(shopMenu, 2, "Buy")
+    Dialog.setButtons(shopMenu, 2, _("buy"))
 end)
 
 local lastStore
