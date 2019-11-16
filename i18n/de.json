@@ -138,5 +138,11 @@
     "vehicle_model_20": "Helikopter",
     "vehicle_model_21": "HUMVEE",
     "vehicle_model_22": "Transporter",
-    "vehicle_model_23": "Militärtransporter"
+    "vehicle_model_23": "Militärtransporter",
+    "buy": "Kaufen",
+    "sell": "Verkaufen",
+    "your_inventory": "Dein Inventar",
+    "shop_inventory": "Shop Inventar",
+    "buy_vehicle": "Fahrzeug kaufen",
+    "vehicle_shop_text": "Willst du wirklich einen {model} für {price} {1} kaufen?"
 }
