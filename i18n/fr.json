@@ -138,5 +138,11 @@
     "vehicle_model_20": "Helicopter",
     "vehicle_model_21": "HUMVEE",
     "vehicle_model_22": "Transporter",
-    "vehicle_model_23": "Military Transporter"
+    "vehicle_model_23": "Military Transporter",
+    "buy": "Buy",
+    "sell": "Sell",
+    "your_inventory": "Your Inventory",
+    "shop_inventory": "Shop Inventory",
+    "buy_vehicle": "Buy Vehicle",
+    "vehicle_shop_text": "Do you really want to buy a {model} for {price} {1}?"
 }
