@@ -36,7 +36,7 @@ AddEvent("OnPlayerSteamAuth", function(player)
                     db = mariadb_get_insert_id(),
                     steam = steamId,
                     name = GetPlayerName(player),
-                    role = "PLAYER"
+                    role = "PLAYER",
                     cash = 500,
                     balance = 4500,
                     xp = 0,

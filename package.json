@@ -15,10 +15,12 @@
 		"inventory/server.lua",
 		"housing/server.lua",
 		"shops/server.lua",
-		"vehicleshops/server.lua"
+		"vehicleshops/server.lua",
+		"gps/server.lua"
 	],
 	"client_scripts": [
 		"json.lua",
+		"base/client/imports.lua",
 		"clothing/client.lua",
 		"atm/client.lua",
 		"admin/client.lua",
@@ -27,7 +29,8 @@
 		"inventory/client.lua",
 		"environment/client.lua",
 		"shops/client.lua",
-		"vehicleshops/client.lua"
+		"vehicleshops/client.lua",
+		"gps/client.lua"
 	],
 	"files": [
 		"hud/hud.html",
