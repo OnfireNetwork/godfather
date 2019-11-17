@@ -1,9 +1,5 @@
 local gchat = false
 
-local function isAdmin(player)
-    return true
-end
-
 AddEvent("OnPlayerChat", function(player, message)
     message = GetPlayerName(player)..": "..message
     local prefix = GetPlayerPropertyValue(player, "chat_prefix")
@@ -39,7 +35,7 @@ AddCommand("g", function(player, ...)
 end)
 
 AddCommand("toggleg", function(player)
-    if not isAdmin(player) then
+    if not IsPlayerAdmin(player) then
         return
     end
     gchat = not gchat
@@ -53,7 +49,7 @@ end)
 AddCommand("support", function(player, ...)
     local args = {...}
     local message = ""
-    if isAdmin(player) then
+    if IsPlayerAdmin(player) then
         for i=2,#args do
             if i > 1 then
                 message = message.." "
@@ -69,7 +65,7 @@ AddCommand("support", function(player, ...)
             message = message..args[i]
         end
         for k,v in pairs(player_data) do
-            if isAdmin(k) then
+            if IsPlayerAdmin(k) then
                 AddPlayerChat(k, "[Support] "..GetPlayerName(player).." ("..player..", #"..player_data[player].db.."): "..message)
             end
         end
@@ -77,7 +73,7 @@ AddCommand("support", function(player, ...)
 end)
 
 AddCommand("broadcast", function(player, ...)
-    if not isAdmin(player) then
+    if not IsPlayerAdmin(player) then
         return
     end
     local args = {...}

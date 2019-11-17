@@ -12,6 +12,7 @@ AddEvent("OnPlayerSteamAuth", function(player)
                 db = mariadb_get_value_name_int(1, "id"),
                 steam = steamId,
                 name = mariadb_get_value_name(1, "name"),
+                role = mariadb_get_value_name(1, "role"),
                 cash = mariadb_get_value_name_int(1, "cash"),
                 balance = mariadb_get_value_name_int(1, "balance"),
                 xp = mariadb_get_value_name_int(1, "xp"),
@@ -35,6 +36,7 @@ AddEvent("OnPlayerSteamAuth", function(player)
                     db = mariadb_get_insert_id(),
                     steam = steamId,
                     name = GetPlayerName(player),
+                    role = "PLAYER"
                     cash = 500,
                     balance = 4500,
                     xp = 0,
@@ -105,7 +107,17 @@ end)
 function GFSavePlayerData(player)
     local primModel, primAmmo = GetPlayerWeapon(player)
     local secModel, secAmmo = GetPlayerWeapon(player)
-    mariadb_query(db, "UPDATE players SET cash='"..player_data[player].cash.."',balance='"..player_data[player].balance.."',xp='"..player_data[player].xp.."',payday='"..player_data[player].payday.."',salary='"..player_data[player].salary.."',phone_bill='"..player_data[player].phone_bill.."',inventory='"..json_encode(player_data[player].inventory).."',licenses='"..json_encode(player_data[player].licenses).."',prim_weapon='"..primModel.."',prim_ammo='"..primAmmo.."',sec_weapon='"..secModel.."',sec_ammo='"..secAmmo.."' WHERE id='"..player_data[player].db.."';")
+    mariadb_query(db, "UPDATE players SET role='"..player_data[player].role.."',cash='"..player_data[player].cash.."',balance='"..player_data[player].balance.."',xp='"..player_data[player].xp.."',payday='"..player_data[player].payday.."',salary='"..player_data[player].salary.."',phone_bill='"..player_data[player].phone_bill.."',inventory='"..json_encode(player_data[player].inventory).."',licenses='"..json_encode(player_data[player].licenses).."',prim_weapon='"..primModel.."',prim_ammo='"..primAmmo.."',sec_weapon='"..secModel.."',sec_ammo='"..secAmmo.."' WHERE id='"..player_data[player].db.."';")
+end
+
+function IsPlayerAdmin(player)
+    if player_data[player] == nil then
+        return false
+    end
+    if player_data[player].role == "ADMIN" then
+        return true
+    end
+    return false
 end
 
 AddEvent("OnPlayerQuit", function(player)

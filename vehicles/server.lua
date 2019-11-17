@@ -1,7 +1,3 @@
-local function isAdmin(player)
-    return true
-end
-
 local fuelUsage = 100 / 3600
 local fuelPrice = 5
 
@@ -24,7 +20,7 @@ AddRemoteEvent("VehicleMenuAction", function(player, action, vehicle)
     if action == "Lock" then
         local owner = GetVehiclePropertyValue(vehicle, "owner")
         if owner == -1 then
-            if not isAdmin(player) then
+            if not IsPlayerAdmin(player) then
                 AddPlayerChat(player, _("vehicle_doesnt_belong_to"))
                 return
             end
