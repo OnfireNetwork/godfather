@@ -1,6 +1,6 @@
 AddCommand("admin", function(player)
     if not IsPlayerAdmin(player) then
-        AddPlayerChat("You are not an admin!")
+        AddPlayerChat(player, "You are not an admin!")
         return
     end
     CallRemoteEvent(player, "OpenAdminMenu")
