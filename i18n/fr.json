@@ -1,8 +1,8 @@
 {
     "currency_symbol": "$",
     "payday": "Jour de paie",
-    "payday_new_balance": "Nouvelle solde",
-    "payday_old_balance": "Ancienne solde",
+    "payday_new_balance": "Nouveau solde",
+    "payday_old_balance": "Ancien solde",
     "payday_salary": "Salaire",
     "deposit_successful": "Dépôt réussi",
     "withdraw_successful": "Retrait réussi",
@@ -145,10 +145,11 @@
     "shop_inventory": "Inventaire de la boutique",
     "buy_vehicle": "Acheter le véhicule",
     "vehicle_shop_text": "Voulez-vous vraiment acheter un {model} au prix de {price} {1} ?",
-    "price": "Price",
-    "owner": "Owner",
-    "house_number": "Housenumber",
-    "house_buy_text": "Do you want to buy this house for {price} {1}?",
-    "buy_house": "Buy House",
-    "house": "House"
+    "price": "Prix",
+    "owner": "Propriétaire",
+    "house_number": "Numéro de porte",
+    "house_buy_text": "Voulez-vous acheter cette maison pour {price} {1}?",
+    "buy_house": "Acheter cette maison",
+    "house": "Maison",
+    "not_your_house": "Ce n'est pas votre maison"
 }
