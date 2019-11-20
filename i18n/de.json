@@ -144,5 +144,11 @@
     "your_inventory": "Dein Inventar",
     "shop_inventory": "Shop Inventar",
     "buy_vehicle": "Fahrzeug kaufen",
-    "vehicle_shop_text": "Willst du wirklich einen {model} für {price} {1} kaufen?"
+    "vehicle_shop_text": "Willst du wirklich einen {model} für {price} {1} kaufen?",
+    "price": "Preis",
+    "owner": "Besitzer",
+    "house_number": "Hausnummer",
+    "house_buy_text": "Willst du dieses Haus wirklich für {price} {1} kaufen?",
+    "buy_house": "Haus kaufen",
+    "house": "Haus"
 }
