@@ -144,5 +144,11 @@
     "your_inventory": "Your Inventory",
     "shop_inventory": "Shop Inventory",
     "buy_vehicle": "Buy Vehicle",
-    "vehicle_shop_text": "Do you really want to buy a {model} for {price} {1}?"
+    "vehicle_shop_text": "Do you really want to buy a {model} for {price} {1}?",
+    "price": "Price",
+    "owner": "Owner",
+    "house_number": "Housenumber",
+    "house_buy_text": "Do you want to buy this house for {price} {1}?",
+    "buy_house": "Buy House",
+    "house": "House"
 }
