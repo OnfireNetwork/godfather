@@ -30,7 +30,8 @@
 		"environment/client.lua",
 		"shops/client.lua",
 		"vehicleshops/client.lua",
-		"gps/client.lua"
+		"gps/client.lua",
+		"housing/client.lua"
 	],
 	"files": [
 		"hud/hud.html",

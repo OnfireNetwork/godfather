@@ -10,7 +10,7 @@ end)
 if data["mode"] == "real" then
     CreateTimer(function()
         local data = config["time"]
-        data["time"]["server_time"] = GetTimeSeconds()
+        data["server_time"] = GetTimeSeconds()
         local players = GetAllPlayers()
         for i=1,#players do
             CallRemoteEvent(players[i], "TimeUpdate", data)
