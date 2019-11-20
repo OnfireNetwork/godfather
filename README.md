@@ -8,6 +8,11 @@ https://github.com/OnfireNetwork/godfather/projects/1
 ## Interested in translating?
 https://poeditor.com/join/project/GdqppvNdcM
 
+## Setup  
+### Dependencies  
+- [dialogui](https://github.com/OnfireNetwork/dialogui)
+- [i18n](https://github.com/OnfireNetwork/i18n)
+
 ## Any Questions?
 Join our discord in case you have further questions.
 https://discord.gg/YFv2gGM
