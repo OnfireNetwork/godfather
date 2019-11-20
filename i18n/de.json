@@ -150,5 +150,6 @@
     "house_number": "Hausnummer",
     "house_buy_text": "Willst du dieses Haus wirklich für {price} {1} kaufen?",
     "buy_house": "Haus kaufen",
-    "house": "Haus"
+    "house": "Haus",
+    "not_your_house": "Das ist nicht dein Haus!"
 }
