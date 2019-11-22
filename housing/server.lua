@@ -826,7 +826,7 @@ AddEvent("OnPlayerDataReady", function(player, data)
             player_data[player].spawn = 0
             return
         end
-        SetPlayerLocation(player, houses[house].spawn[1], houses[house].spawn[2], houses[house].spawn[3])
+        SetPlayerLocation(player, houses[house].spawn[1], houses[house].spawn[2], houses[house].spawn[3] + 100)
         SetPlayerHeading(player, houses[house].spawn[4])
     end
 end)

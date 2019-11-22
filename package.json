@@ -16,7 +16,8 @@
 		"housing/server.lua",
 		"shops/server.lua",
 		"vehicleshops/server.lua",
-		"gps/server.lua"
+		"gps/server.lua",
+		"helper/server.lua"
 	],
 	"client_scripts": [
 		"json.lua",
