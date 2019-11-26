@@ -157,5 +157,12 @@
     "item_chainsaw": "Chainsaw",
     "item_fishing_rod": "Fishing Rod",
     "item_fish": "Fish",
-    "player_not_found": "The player wasn't found!"
+    "player_not_found": "The player wasn't found!",
+    "item_ephedrine": "Ephedrine",
+    "item_battery": "Battery",
+    "item_meth": "Crystal Meth",
+    "item_weed": "Weed",
+    "item_cocaine": "Cocaine",
+    "item_coca_leaf": "Coca Leaf",
+    "item_dissolver": "Dissolver"
 }
