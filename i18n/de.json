@@ -157,5 +157,12 @@
     "item_chainsaw": "Kettensäge",
     "item_fishing_rod": "Angel",
     "item_fish": "Fisch",
-    "player_not_found": "Der Spieler wurde nicht gefunden!"
+    "player_not_found": "Der Spieler wurde nicht gefunden!",
+    "item_ephedrine": "Ephedrin",
+    "item_battery": "Batterie",
+    "item_meth": "Crystal Meth",
+    "item_weed": "Weed",
+    "item_cocaine": "Kokain",
+    "item_coca_leaf": "Kokablatt",
+    "item_dissolver": "Lösungsmittel"
 }
