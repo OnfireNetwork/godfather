@@ -151,5 +151,10 @@
     "house_buy_text": "Willst du dieses Haus wirklich für {price} {1} kaufen?",
     "buy_house": "Haus kaufen",
     "house": "Haus",
-    "not_your_house": "Das ist nicht dein Haus!"
+    "not_your_house": "Das ist nicht dein Haus!",
+    "item_log": "Baumstamm",
+    "item_planks": "Holzplatten",
+    "item_chainsaw": "Kettensäge",
+    "item_fishing_rod": "Angel",
+    "item_fish": "Fisch"
 }
