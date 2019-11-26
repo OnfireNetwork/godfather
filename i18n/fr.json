@@ -148,8 +148,13 @@
     "price": "Prix",
     "owner": "Propriétaire",
     "house_number": "Numéro de porte",
-    "house_buy_text": "Voulez-vous acheter cette maison pour {price} {1}?",
+    "house_buy_text": "Voulez-vous acheter cette maison pour {price} {1} ?",
     "buy_house": "Acheter cette maison",
     "house": "Maison",
-    "not_your_house": "Ce n'est pas votre maison"
+    "not_your_house": "Ce n'est pas votre maison",
+    "item_log": "Wood Log",
+    "item_planks": "Wooden Planks",
+    "item_chainsaw": "Chainsaw",
+    "item_fishing_rod": "Fishing Rod",
+    "item_fish": "Fish"
 }
