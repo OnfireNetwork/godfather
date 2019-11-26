@@ -156,5 +156,6 @@
     "item_planks": "Holzplatten",
     "item_chainsaw": "Kettensäge",
     "item_fishing_rod": "Angel",
-    "item_fish": "Fisch"
+    "item_fish": "Fisch",
+    "player_not_found": "Der Spieler wurde nicht gefunden!"
 }
