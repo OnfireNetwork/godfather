@@ -156,5 +156,6 @@
     "item_planks": "Wooden Planks",
     "item_chainsaw": "Chainsaw",
     "item_fishing_rod": "Fishing Rod",
-    "item_fish": "Fish"
+    "item_fish": "Fish",
+    "player_not_found": "The player wasn't found!"
 }
