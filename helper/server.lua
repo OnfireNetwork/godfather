@@ -25,6 +25,7 @@ function SetAttachedItem(player, slot, type)
     if objects[player] ~= nil then
         if objects[player][slot] ~= nil then
             DestroyObject(objects[player][slot])
+            objects[player][slot] = nil
         end
     else
         objects[player] = {}
@@ -92,3 +93,7 @@ AddEvent("OnPlayerQuit", function(player)
     end
     objects[player] = nil
 end)
+
+function SetWaypoint(player, slot, name, x, y, z)
+    CallRemoteEvent(player, "SetWaypoint", slot, name, x, y, z)
+end

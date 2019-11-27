@@ -34,7 +34,8 @@
 		"vehicleshops/client.lua",
 		"gps/client.lua",
 		"housing/client.lua",
-		"jobs/client.lua"
+		"jobs/client.lua",
+		"helper/client.lua"
 	],
 	"files": [
 		"hud/hud.html",

@@ -130,7 +130,11 @@ function GetPlayerInventoryItemAmount(player, item)
 end
 
 function CanPlayerCarryItem(player, item, amount)
-    return player_data[player].inventory[item] + amount <= itemTypes[item].max
+    local current = player_data[player].inventory[item]
+    if current == nil then
+        current = 0
+    end
+    return current + amount <= itemTypes[item].max
 end
 
 local function weaponPack(player, slot)

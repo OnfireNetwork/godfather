@@ -24,6 +24,7 @@ AddEvent("OnPlayerSteamAuth", function(player)
                 licenses = json_decode(mariadb_get_value_name(1, "licenses")),
                 spawn = mariadb_get_value_name_int(1, "spawn"),
                 job = mariadb_get_value_name(1, "job"),
+                dead = false
             }
             SetPlayerWeapon(player, mariadb_get_value_name_int(1, "prim_weapon"), mariadb_get_value_name_int(1, "prim_ammo"), false, 2, true)
             SetPlayerWeapon(player, mariadb_get_value_name_int(1, "sec_weapon"), mariadb_get_value_name_int(1, "sec_ammo"), false, 3, true)
@@ -50,7 +51,8 @@ AddEvent("OnPlayerSteamAuth", function(player)
                     inventory = {},
                     licenses = {},
                     spawn = 0,
-                    job = "NONE"
+                    job = "NONE",
+                    dead = false
                 }
                 SetPlayerPropertyValue(player, "cash", player_data[player].cash, true)
                 SetPlayerPropertyValue(player, "balance", player_data[player].balance, true)
@@ -165,3 +167,19 @@ CreateTimer(function()
         end
     end
 end, 60000)
+
+function GFIsPlayerDead(player)
+    return player_data[player].dead
+end
+
+AddEvent("OnPlayerDamage", function(player, type, amount)
+    if GFIsPlayerDead(player) then
+        SetPlayerHealth(player, GetPlayerHealth(player)+amount)
+        return
+    end
+    if amount >= GetPlayerHealth(player) then
+        SetPlayerHealth(player, 100+amount)
+        SetPlayerAnimation(player, "LAY13")
+        player_data[player].dead = true
+    end
+end)
