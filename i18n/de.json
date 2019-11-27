@@ -164,5 +164,6 @@
     "item_weed": "Weed",
     "item_cocaine": "Kokain",
     "item_coca_leaf": "Kokablatt",
-    "item_dissolver": "Lösungsmittel"
+    "item_dissolver": "Lösungsmittel",
+    "item_cutter": "Schere"
 }
