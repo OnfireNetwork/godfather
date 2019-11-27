@@ -7,6 +7,18 @@ local pricing = {
         wp_pumpgun = 2000,
         wp_m16 = 5000,
         mag_rifle = 200
+    },
+    hardware = {
+        planks = 50
+    },
+    gasstation = {
+        fish = 50,
+        chainsaw = 200,
+        fishing_rod = 100,
+        mobile_phone = 300,
+        dissolver = 50,
+        battery = 50,
+        cutter = 100
     }
 }
 

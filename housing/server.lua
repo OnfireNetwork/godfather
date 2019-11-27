@@ -827,7 +827,18 @@ AddEvent("OnPlayerDataReady", function(player, data)
             return
         end
         SetPlayerLocation(player, houses[house].spawn[1], houses[house].spawn[2], houses[house].spawn[3] + 100)
-        SetPlayerHeading(player, houses[house].spawn[4])
+        Delay(1000, function()
+            SetPlayerLocation(player, houses[house].spawn[1], houses[house].spawn[2], houses[house].spawn[3] + 10)
+            SetPlayerHeading(player, houses[house].spawn[4])
+        end)
+        Delay(2000, function()
+            SetPlayerLocation(player, houses[house].spawn[1], houses[house].spawn[2], houses[house].spawn[3] + 10)
+            SetPlayerHeading(player, houses[house].spawn[4])
+        end)
+        Delay(3000, function()
+            SetPlayerLocation(player, houses[house].spawn[1], houses[house].spawn[2], houses[house].spawn[3] + 10)
+            SetPlayerHeading(player, houses[house].spawn[4])
+        end)
     end
 end)
 

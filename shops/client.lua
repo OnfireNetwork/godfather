@@ -15,6 +15,31 @@ local shops = {
         locations = {
             {-181943.796875, -40694.6953125, 1163.1500244141}
         }
+    },
+    {
+        type = "hardware",
+        items = {
+            planks = 50
+        },
+        locations = {
+            {-168889.1875, -41391.2578125, 1146.94921875}
+        }
+    },
+    {
+        type = "gasstation",
+        items = {
+            chainsaw = 200,
+            fishing_rod = 100,
+            fish = 50,
+            mobile_phone = 300,
+            dissolver = 50,
+            battery = 50,
+            cutter = 100
+        },
+        locations = {
+            {-169170.609375, -39257.78515625, 1149.6500244141},
+            {128764.2890625, 77793.34375, 1577.6500244141}
+        }
     }
 }
 

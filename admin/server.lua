@@ -130,3 +130,7 @@ AddRemoteEvent("AdminToggleSpec", function(player)
         spectating[player] = nil
     end
 end)
+
+AddCommand("anim", function(player, name)
+    SetPlayerAnimation(player, name)
+end)

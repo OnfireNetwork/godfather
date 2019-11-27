@@ -25,7 +25,20 @@ local itemTypes = {
     ["wp_tazer"] = { max = 10 },
     ["mag_rifle"] = {},
     ["mag_pistol"] = {},
-    ["mobile_phone"] = {}
+    ["mobile_phone"] = {},
+    ["chainsaw"] = {},
+    ["log"] = {},
+    ["planks"] = {},
+    ["fishing_rod"] = {},
+    ["fish"] = {},
+    ["battery"] = {},
+    ["ephedrine"] = {},
+    ["meth"] = {},
+    ["weed"] = {},
+    ["cocaine"] = {},
+    ["coca_leaf"] = {},
+    ["dissolver"] = {},
+    ["cutter"] = {}
 }
 
 for k,v in pairs(itemTypes) do
@@ -196,6 +209,136 @@ AddRemoteEvent("InventoryUseItem", function(player, item)
         if model ~= 0 then
             SetPlayerWeapon(player, model, ammo + weapon_config[model].MagazineSize, true, 3, true)
             used = true
+        end
+    end
+    if item == "chainsaw" then
+        local px,py,pz = GetPlayerLocation(player)
+        if GetDistance3D(px, py, pz,-222532, -70046, 850) < 5000 then
+            SetAttachedItem(player, "hand_r", 1047)
+            SetPlayerAnimation(player, "LOCKDOOR")
+            CallRemoteEvent(player, "LockControlMove", true)
+            Delay(3000, function()
+                SetPlayerAnimation(player, "LOCKDOOR")
+            end)
+            Delay(6000, function()
+                SetPlayerAnimation(player, "LOCKDOOR")
+            end)
+            Delay(10000, function()
+                CallRemoteEvent(player, "LockControlMove", false)
+                SetAttachedItem(player, "hand_r", 0)
+                AddPlayerInventoryItem(player, "log", 1)
+            end)
+        end
+    end
+    if item == "log" then
+        local px,py,pz = GetPlayerLocation(player)
+        if GetDistance3D(px, py, pz,-193169, -34121, 1148) < 300 then
+            used = true
+            SetAttachedItem(player, "hand_r", 1075)
+            SetPlayerAnimation(player, "LOCKDOOR")
+            CallRemoteEvent(player, "LockControlMove", true)
+            Delay(3000, function()
+                SetPlayerAnimation(player, "LOCKDOOR")
+            end)
+            Delay(6000, function()
+                SetPlayerAnimation(player, "LOCKDOOR")
+            end)
+            Delay(10000, function()
+                CallRemoteEvent(player, "LockControlMove", false)
+                SetAttachedItem(player, "hand_r", 0)
+                AddPlayerInventoryItem(player, "planks", 1)
+            end)
+        end
+    end
+    if item == "fishing_rod" then
+        local px,py,pz = GetPlayerLocation(player)
+        SetAttachedItem(player, "hand_r", 1111)
+        SetPlayerAnimation(player, "LOCKDOOR")
+        CallRemoteEvent(player, "LockControlMove", true)
+        Delay(16000, function()
+            SetPlayerAnimation(player, "LOCKDOOR")
+        end)
+        Delay(20000, function()
+            CallRemoteEvent(player, "LockControlMove", false)
+            SetAttachedItem(player, "hand_r", 0)
+            AddPlayerInventoryItem(player, "fish", 1)
+        end)
+    end
+    if item == "ephedrine" then
+        local px,py,pz = GetPlayerLocation(player)
+        if GetDistance3D(px, py, pz, 199377.3125, 55606.8671875, 1408.3077392578) < 300 then
+            if GetPlayerInventoryItemAmount(player, "battery") > 0 then
+                used = true
+                RemovePlayerInventoryItem(player, "battery", 1)
+                SetPlayerAnimation(player, "COMBINE")
+                CallRemoteEvent(player, "LockControlMove", true)
+                Delay(4000, function()
+                    SetPlayerAnimation(player, "COMBINE")
+                end)
+                Delay(8000, function()
+                    SetPlayerAnimation(player, "COMBINE")
+                end)
+                Delay(13000, function()
+                    CallRemoteEvent(player, "LockControlMove", false)
+                    AddPlayerInventoryItem(player, "meth", 1)
+                end)
+            else
+                AddPlayerChat(player, _("not_enough_items", _("item_battery")))
+            end
+        end
+    end
+    if item == "coca_leaf" then
+        local px,py,pz = GetPlayerLocation(player)
+        if GetDistance3D(px, py, pz, 199377.3125, 55606.8671875, 1408.3077392578) < 300 then
+            if GetPlayerInventoryItemAmount(player, "dissolver") > 0 then
+                used = true
+                RemovePlayerInventoryItem(player, "dissolver", 1)
+                SetPlayerAnimation(player, "COMBINE")
+                CallRemoteEvent(player, "LockControlMove", true)
+                Delay(4000, function()
+                    SetPlayerAnimation(player, "COMBINE")
+                end)
+                Delay(8000, function()
+                    SetPlayerAnimation(player, "COMBINE")
+                end)
+                Delay(13000, function()
+                    CallRemoteEvent(player, "LockControlMove", false)
+                    AddPlayerInventoryItem(player, "cocaine", 1)
+                end)
+            else
+                AddPlayerChat(player, _("not_enough_items", _("item_dissolver")))
+            end
+        end
+    end
+    if item == "cutter" then
+        local px,py,pz = GetPlayerLocation(player)
+        if GetDistance3D(px, py, pz, 166593.921875, 140630.359375, 7604.8002929688) < 300 then
+            SetPlayerAnimation(player, "LOCKDOOR")
+            CallRemoteEvent(player, "LockControlMove", true)
+            Delay(3000, function()
+                SetPlayerAnimation(player, "PICKUP_MIDDLE")
+            end)
+            Delay(6000, function()
+                SetPlayerAnimation(player, "COMBINE")
+            end)
+            Delay(11000, function()
+                CallRemoteEvent(player, "LockControlMove", false)
+                AddPlayerInventoryItem(player, "ephedrine", 1)
+            end)
+        end
+        if GetDistance3D(px, py, pz, 84737.2890625, 128046.6875, 5133.4516601563) < 300 then
+            SetPlayerAnimation(player, "LOCKDOOR")
+            CallRemoteEvent(player, "LockControlMove", true)
+            Delay(3000, function()
+                SetPlayerAnimation(player, "PICKUP_MIDDLE")
+            end)
+            Delay(6000, function()
+                SetPlayerAnimation(player, "PICKUP_LOWER")
+            end)
+            Delay(10000, function()
+                CallRemoteEvent(player, "LockControlMove", false)
+                AddPlayerInventoryItem(player, "coca_leaf", 1)
+            end)
         end
     end
     if used then

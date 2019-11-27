@@ -32,6 +32,12 @@ AddEvent("OnTranslationReady", function()
                     z = 1163
                 },
                 {
+                    name = "Hardware Store",
+                    x = -168889.1875,
+                    y = -41391.2578125,
+                    z = 1146.94921875
+                },
+                {
                     name = "Car Dealer",
                     x = -189761,
                     y = -51442,
@@ -44,9 +50,45 @@ AddEvent("OnTranslationReady", function()
                     z = 1252
                 }
             }
+        },
+        {
+            name = "Jobs",
+            menu = -1,
+            places = {
+                {
+                    name = "Forest (Woodcutting)",
+                    x = -222532,
+                    y = -70046,
+                    z = 850
+                },
+                {
+                    name = "Sawmill (Woodcutting)",
+                    x = -193169,
+                    y = -34121,
+                    z = 1148
+                },
+                {
+                    name = "Drug Camp",
+                    x = 197947.21875,
+                    y = 56014.87890625,
+                    z = 1408.3077392578
+                },
+                {
+                    name = "Ephedra Plants (Methcooking)",
+                    x = 166593.921875,
+                    y = 140630.359375,
+                    z = 7604.8002929688
+                },
+                {
+                    name = "Coca Field (Cocainecooking)",
+                    x = 84737.2890625,
+                    y = 128046.6875,
+                    z = 5133.4516601563
+                }
+            }
         }
     }
-    categoryMenu = Dialog.create("GPS", nil, places[1].name, places[2].name, _("cancel"))
+    categoryMenu = Dialog.create("GPS", nil, places[1].name, places[2].name, places[3].name, _("cancel"))
     for i=1,#places do
         local buttons = {}
         for j=1,#places[i].places do

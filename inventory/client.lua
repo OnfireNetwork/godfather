@@ -112,3 +112,11 @@ end)
 AddRemoteEvent("SpawnFirework", function(model, x, y, z, rx, ry, rz)
     CreateFireworks(model, x, y, z, rx, ry, rz)
 end)
+
+AddRemoteEvent("LockControlMove", function(move)
+    SetIgnoreMoveInput(move)
+end)
+
+AddRemoteEvent("LockControlLook", function(look)
+    SetIgnoreLookInput(look)
+end)

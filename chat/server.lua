@@ -97,11 +97,14 @@ AddCommand("sms", function(player, ...)
     end
     local args = {...}
     if #args < 2 then
-        AddPlayerChat("/sms <phonenumber> <message>")
+        AddPlayerChat(player, "/sms <id> <message>")
         return
     end
-    local phonenumber = args[1]
-    -- TODO
+    local target = GetPlayerIdByDbId(tonumber(args[1]))
+    if target == 0 then
+        AddPlayerChat(player, _("player_not_found"))
+        return
+    end
     local message = ""
     for i=2,#args do
         if i > 2 then
@@ -109,7 +112,10 @@ AddCommand("sms", function(player, ...)
         end
         message = message..args[i]
     end
-    -- TODO
+    AddPlayerChat(target, "[SMS] "..GetPlayerName(player)..": "..message)
     player_data[player].phone_bill = player_data[player].phone_bill + 30
 end)
 
+AddCommand("id", function(player)
+    AddPlayerChat(player, "Your ID: "..player_data[player].db)
+end)

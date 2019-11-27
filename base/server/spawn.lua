@@ -23,6 +23,7 @@ AddEvent("OnPlayerSteamAuth", function(player)
                 inventory = json_decode(mariadb_get_value_name(1, "inventory")),
                 licenses = json_decode(mariadb_get_value_name(1, "licenses")),
                 spawn = mariadb_get_value_name_int(1, "spawn"),
+                job = mariadb_get_value_name(1, "job"),
             }
             SetPlayerWeapon(player, mariadb_get_value_name_int(1, "prim_weapon"), mariadb_get_value_name_int(1, "prim_ammo"), false, 2, true)
             SetPlayerWeapon(player, mariadb_get_value_name_int(1, "sec_weapon"), mariadb_get_value_name_int(1, "sec_ammo"), false, 3, true)
@@ -30,6 +31,7 @@ AddEvent("OnPlayerSteamAuth", function(player)
             SetPlayerPropertyValue(player, "balance", player_data[player].balance, true)
             SetPlayerPropertyValue(player, "inventory", player_data[player].inventory, true)
             SetPlayerPropertyValue(player, "licenses", player_data[player].licenses, true)
+            SetPlayerPropertyValue(player, "job", player_data[player].job, true)
             CallEvent("OnPlayerDataReady", player, player_data[player])
         else
             mariadb_query(db, "INSERT INTO players (steam_id,name,inventory,licenses) VALUES ('"..steamId.."','"..GetPlayerName(player).."','{}','{}');", function()
@@ -47,7 +49,8 @@ AddEvent("OnPlayerSteamAuth", function(player)
                     phone_bill = 0,
                     inventory = {},
                     licenses = {},
-                    spawn = 0
+                    spawn = 0,
+                    job = "NONE"
                 }
                 SetPlayerPropertyValue(player, "cash", player_data[player].cash, true)
                 SetPlayerPropertyValue(player, "balance", player_data[player].balance, true)
@@ -89,6 +92,15 @@ function GetPlayerBalance(player)
     return player_data[player].balance
 end
 
+function GetPlayerIdByDbId(id)
+    for k,v in pairs(player_data) do
+        if v.db == id then
+            return k
+        end
+    end
+    return 0
+end
+
 local function updatePlayerList()
     local playerList = {}
     for k,v in pairs(player_data) do
@@ -109,7 +121,7 @@ end)
 function GFSavePlayerData(player)
     local primModel, primAmmo = GetPlayerWeapon(player)
     local secModel, secAmmo = GetPlayerWeapon(player)
-    mariadb_query(db, "UPDATE players SET spawn='"..player_data[player].spawn.."',role='"..player_data[player].role.."',cash='"..player_data[player].cash.."',balance='"..player_data[player].balance.."',xp='"..player_data[player].xp.."',payday='"..player_data[player].payday.."',salary='"..player_data[player].salary.."',phone_bill='"..player_data[player].phone_bill.."',inventory='"..json_encode(player_data[player].inventory).."',licenses='"..json_encode(player_data[player].licenses).."',prim_weapon='"..primModel.."',prim_ammo='"..primAmmo.."',sec_weapon='"..secModel.."',sec_ammo='"..secAmmo.."' WHERE id='"..player_data[player].db.."';")
+    mariadb_query(db, "UPDATE players SET job='"..player_data[player].job.."',spawn='"..player_data[player].spawn.."',role='"..player_data[player].role.."',cash='"..player_data[player].cash.."',balance='"..player_data[player].balance.."',xp='"..player_data[player].xp.."',payday='"..player_data[player].payday.."',salary='"..player_data[player].salary.."',phone_bill='"..player_data[player].phone_bill.."',inventory='"..json_encode(player_data[player].inventory).."',licenses='"..json_encode(player_data[player].licenses).."',prim_weapon='"..primModel.."',prim_ammo='"..primAmmo.."',sec_weapon='"..secModel.."',sec_ammo='"..secAmmo.."' WHERE id='"..player_data[player].db.."';")
 end
 
 function IsPlayerAdmin(player)

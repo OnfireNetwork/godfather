@@ -17,7 +17,8 @@
 		"shops/server.lua",
 		"vehicleshops/server.lua",
 		"gps/server.lua",
-		"helper/server.lua"
+		"helper/server.lua",
+		"jobs/server.lua"
 	],
 	"client_scripts": [
 		"json.lua",
@@ -32,7 +33,8 @@
 		"shops/client.lua",
 		"vehicleshops/client.lua",
 		"gps/client.lua",
-		"housing/client.lua"
+		"housing/client.lua",
+		"jobs/client.lua"
 	],
 	"files": [
 		"hud/hud.html",
