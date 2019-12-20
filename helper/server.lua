@@ -16,6 +16,9 @@ local offsets = {
     },
     ["552"] = { -- Cutter
         hand_r = {-14,3,10,60,-130,0}
+    },
+    ["1063"] = { -- Gardening Fork/Pickaxe
+        hand_r = {-10,3,75,0,0,179}
     }
 }
 
