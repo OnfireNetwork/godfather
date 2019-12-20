@@ -124,7 +124,3 @@ AddRemoteEvent("OpenGPS", function()
 end)
 
 SetPostEffect("DepthOfField", "DepthBlurRadius", 0)
-
-AddEvent("OnDialogUIReady", function()
-    Dialog.setGlobalTheme("saitama")
-end)

@@ -1,6 +1,8 @@
 Dialog = Dialog or ImportPackage("dialogui")
 _ = _ or function(k,...) return ImportPackage("i18n").t(GetPackageName(),k,...) end
 
+Dialog.setGlobalTheme("flat")
+
 local adminMenu
 local teleportMenu
 local teleportPlaceMenu
