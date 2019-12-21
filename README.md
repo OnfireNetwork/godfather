@@ -15,4 +15,4 @@ https://poeditor.com/join/project/GdqppvNdcM
 
 ## Any Questions?
 Join our discord in case you have further questions.
-https://discord.gg/YFv2gGM
+https://discord.gg/tSMs78A
